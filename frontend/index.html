@@ -1,126 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>UMP Engine</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Officials Engine</title>
 
 <style>
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-        background: radial-gradient(circle at top, #0b1220, #05070d);
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
 
-    .container {
-        width: 420px;
-        padding: 30px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(15px);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-        text-align: center;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #0b1220, #05070d);
+    color: white;
+    overflow-x: hidden;
+}
 
-    .logo {
-        width: 120px;
-        height: 120px;
-        object-fit: contain;
-        margin-bottom: 15px;
-        filter: drop-shadow(0 0 10px rgba(0,150,255,0.4));
-    }
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
 
-    h1 {
-        margin: 10px 0;
-        font-size: 28px;
-        letter-spacing: 2px;
-        color: #4db8ff;
-    }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
 
-    .tagline {
-        font-size: 12px;
-        opacity: 0.7;
-        margin-bottom: 20px;
-    }
+.logo span {
+    color: #3aa6ff;
+}
 
-    button {
-        padding: 12px 20px;
-        border: none;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #0077ff, #00c3ff);
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s ease;
-        width: 100%;
-    }
+.nav-links a {
+    margin: 0 15px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+}
 
-    button:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 20px rgba(0,170,255,0.5);
-    }
+.nav-links a:hover {
+    color: #3aa6ff;
+}
 
-    #output {
-        margin-top: 20px;
-        font-size: 18px;
-        color: #00ffcc;
-    }
+/* HERO */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px;
+}
 
-    .side-label {
-        font-size: 11px;
-        opacity: 0.6;
-        margin-top: 10px;
-        letter-spacing: 1px;
-    }
+/* LEFT TEXT */
+.hero-text {
+    max-width: 50%;
+}
+
+.tag {
+    color: #3aa6ff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero-text h1 {
+    font-size: 56px;
+    margin: 0;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.hero-text h1 span {
+    color: #3aa6ff;
+}
+
+.hero-text p {
+    margin-top: 20px;
+    color: #bbb;
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+/* BUTTONS */
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #0077ff, #00c3ff);
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #333;
+    color: #aaa;
+}
+
+/* RIGHT IMAGE */
+.hero-image {
+    position: relative;
+}
+
+.hero-image img {
+    width: 420px;
+    filter: drop-shadow(0 0 40px rgba(0,140,255,0.4));
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* FEATURES */
+.features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 60px;
+}
+
+.card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.card h3 {
+    margin: 10px 0;
+    color: #3aa6ff;
+    font-size: 14px;
+}
+
+.card p {
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* FOOTER LINE */
+.footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 2px;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- NAV -->
+<nav>
+    <div class="logo">
+        ⚾ OFFICIALS <span>ENGINE</span>
+    </div>
 
-    <!-- YOUR EMBLEM (save generated image as emblem.png) -->
-    <img src="emblem.png" class="logo" alt="UMP Emblem">
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">About</a>
+    </div>
+</nav>
 
-    <h1>UMP ENGINE</h1>
-    <div class="tagline">Baseball Umpire Grading System</div>
+<!-- HERO -->
+<section class="hero">
 
-    <button onclick="runGrade()">Grade Game</button>
+    <!-- LEFT -->
+    <div class="hero-text">
+        <div class="tag">BUILT FOR OFFICIALS • PERFORMANCE DRIVEN</div>
 
-    <p id="output"></p>
+        <h1>
+            POWERING<br>
+            <span>OFFICIALS</span>.<br>
+            ELEVATING THE GAME.
+        </h1>
 
-    <div class="side-label">OFFICIALS ENGINE • v1.0</div>
+        <p>
+            Officials Engine is an advanced platform for baseball umpires
+            to review calls, track accuracy, and improve performance using
+            AI-driven grading tools.
+        </p>
 
+        <div class="buttons">
+            <button class="btn btn-primary">Get Started</button>
+            <button class="btn btn-secondary">Learn More</button>
+        </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="hero-image">
+        <img src="emblem.png" alt="Umpire Mask Emblem">
+    </div>
+
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+
+    <div class="card">
+        <h3>GAME REVIEW</h3>
+        <p>Upload games and analyze every pitch decision.</p>
+    </div>
+
+    <div class="card">
+        <h3>AI GRADING</h3>
+        <p>Automated accuracy scoring for umpire performance.</p>
+    </div>
+
+    <div class="card">
+        <h3>TRACK PROGRESS</h3>
+        <p>Monitor improvement over time with stats.</p>
+    </div>
+
+    <div class="card">
+        <h3>OFFICIALS HUB</h3>
+        <p>Connect and compete with other umpires.</p>
+    </div>
+
+</section>
+
+<div class="footer">
+    BUILT BY OFFICIALS • FOR OFFICIALS
 </div>
-
-<script>
-async function runGrade() {
-
-    const response = await fetch("http://127.0.0.1:8000/grade", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            pitches: [
-                { ai_call: "strike", umpire_call: "ball" },
-                { ai_call: "ball", umpire_call: "ball" }
-            ]
-        })
-    });
-
-    const data = await response.json();
-
-    document.getElementById("output").innerText =
-        "Accuracy: " + data.accuracy + "%";
-}
-</script>
 
 </body>
 </html>
