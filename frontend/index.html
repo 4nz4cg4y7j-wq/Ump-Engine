@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>UMP Engine</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        background: radial-gradient(circle at top, #0b1220, #05070d);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        width: 420px;
+        padding: 30px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 0 10px rgba(0,150,255,0.4));
+    }
+
+    h1 {
+        margin: 10px 0;
+        font-size: 28px;
+        letter-spacing: 2px;
+        color: #4db8ff;
+    }
+
+    .tagline {
+        font-size: 12px;
+        opacity: 0.7;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #0077ff, #00c3ff);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s ease;
+        width: 100%;
+    }
+
+    button:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 20px rgba(0,170,255,0.5);
+    }
+
+    #output {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #00ffcc;
+    }
+
+    .side-label {
+        font-size: 11px;
+        opacity: 0.6;
+        margin-top: 10px;
+        letter-spacing: 1px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- YOUR EMBLEM (save generated image as emblem.png) -->
+    <img src="emblem.png" class="logo" alt="UMP Emblem">
+
+    <h1>UMP ENGINE</h1>
+    <div class="tagline">Baseball Umpire Grading System</div>
+
+    <button onclick="runGrade()">Grade Game</button>
+
+    <p id="output"></p>
+
+    <div class="side-label">OFFICIALS ENGINE • v1.0</div>
+
+</div>
+
+<script>
+async function runGrade() {
+
+    const response = await fetch("http://127.0.0.1:8000/grade", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            pitches: [
+                { ai_call: "strike", umpire_call: "ball" },
+                { ai_call: "ball", umpire_call: "ball" }
+            ]
+        })
+    });
+
+    const data = await response.json();
+
+    document.getElementById("output").innerText =
+        "Accuracy: " + data.accuracy + "%";
+}
+</script>
+
+</body>
+</html>
