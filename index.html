@@ -8,7 +8,6 @@
   <style>
     :root {
       --bg: #020913;
-      --panel: #061a2d;
       --line: rgba(134, 188, 255, 0.32);
       --text: #f7fbff;
       --muted: #d9e6f7;
@@ -16,10 +15,15 @@
       --blue-2: #0f58d9;
       --green: #57d980;
       --violet: #9663ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -37,6 +41,27 @@
     .container {
       width: min(100% - 40px, 1200px);
       margin: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 24px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      color: #fff;
+      font-weight: 800;
+      background: linear-gradient(180deg, var(--blue), var(--blue-2));
+      box-shadow: 0 14px 30px rgba(36, 120, 255, 0.25);
+      white-space: nowrap;
+    }
+
+    .btn.outline {
+      background: rgba(2, 9, 19, 0.45);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: none;
     }
 
     header {
@@ -57,19 +82,23 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1px;
+      line-height: 1;
     }
 
     .logo span {
-      color: var(--blue);
       display: block;
+      margin-top: 5px;
+      color: var(--blue);
       font-size: 1rem;
       letter-spacing: 0.35em;
     }
 
     .menu {
       display: flex;
+      align-items: center;
       gap: 34px;
       font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .menu a:hover {
@@ -81,33 +110,14 @@
       gap: 14px;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 50px;
-      padding: 0 24px;
-      border-radius: 8px;
-      font-weight: 800;
-      background: linear-gradient(180deg, var(--blue), var(--blue-2));
-      border: 1px solid transparent;
-      box-shadow: 0 14px 30px rgba(36, 120, 255, 0.25);
-    }
-
-    .btn.outline {
-      background: rgba(2, 9, 19, 0.45);
-      border-color: rgba(255, 255, 255, 0.7);
-      box-shadow: none;
-    }
-
     .hero {
       position: relative;
       overflow: hidden;
+      padding: 80px 0;
       background:
         radial-gradient(circle at 95% 12%, rgba(36, 120, 255, 0.4), transparent 16rem),
         radial-gradient(circle at 5% 10%, rgba(80, 180, 255, 0.3), transparent 14rem),
         linear-gradient(180deg, #062747, #020913);
-      padding: 80px 0;
     }
 
     .hero::after {
@@ -180,11 +190,11 @@
     .whistle-shape {
       width: 230px;
       height: 120px;
-      background: linear-gradient(145deg, #ffffff, #7e8794 55%, #111923);
+      position: relative;
+      transform: rotate(-15deg);
       border: 4px solid #f6f8fb;
       border-radius: 55% 18% 18% 55%;
-      transform: rotate(-15deg);
-      position: relative;
+      background: linear-gradient(145deg, #ffffff, #7e8794 55%, #111923);
     }
 
     .whistle-shape::before {
@@ -249,8 +259,8 @@
     }
 
     .plans h2 {
-      text-align: center;
       margin: 0 0 22px;
+      text-align: center;
       text-transform: uppercase;
       font-size: clamp(1.7rem, 2.5vw, 2.35rem);
     }
@@ -266,6 +276,7 @@
       border: 1px solid var(--line);
       border-radius: 10px;
       background: linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.9));
+      box-shadow: var(--shadow);
     }
 
     .plan h3 {
@@ -274,9 +285,17 @@
       font-size: 1.25rem;
     }
 
-    .blue { color: var(--blue); }
-    .green { color: var(--green); }
-    .violet { color: var(--violet); }
+    .blue {
+      color: var(--blue);
+    }
+
+    .green {
+      color: var(--green);
+    }
+
+    .violet {
+      color: var(--violet);
+    }
 
     .price {
       margin-bottom: 10px;
@@ -343,6 +362,11 @@
         text-align: center;
       }
 
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
       .feature {
         border-left: 0;
         border-top: 1px solid rgba(149, 196, 255, 0.22);
@@ -350,11 +374,6 @@
 
       .feature:first-child {
         border-top: 0;
-      }
-
-      .hero p {
-        margin-left: auto;
-        margin-right: auto;
       }
     }
 
@@ -388,7 +407,7 @@
         <span>Engine</span>
       </a>
 
-      <nav class="menu">
+      <nav class="menu" aria-label="Main navigation">
         <a href="#features">Features</a>
         <a href="./pricing.html">Pricing</a>
         <a href="#plans">How It Works</a>
@@ -396,8 +415,8 @@
       </nav>
 
       <div class="actions">
-        <a class="btn outline" href="/login">Login</a>
-        <a class="btn" href="/get-started">Get Started</a>
+        <a class="btn outline" href="login.html">Login</a>
+        <a class="btn" href="register.html">Get Started</a>
       </div>
     </div>
   </header>
@@ -413,12 +432,12 @@
           </p>
 
           <div class="hero-buttons">
-            <a class="btn" href="/get-started">Get Started</a>
-            <a class="btn outline" href="/login">Login</a>
+            <a class="btn" href="register.html">Get Started</a>
+            <a class="btn outline" href="login.html">Login</a>
           </div>
         </div>
 
-        <div class="whistle-card">
+        <div class="whistle-card" aria-hidden="true">
           <div class="whistle">
             <div class="whistle-shape"></div>
           </div>
@@ -474,7 +493,7 @@
     <section class="cta" id="about">
       <div class="container cta-inner">
         <p>Join hundreds of assigners and officials who trust Officials Engine every day.</p>
-        <a class="btn" href="/get-started">Create Your Account</a>
+        <a class="btn" href="register.html">Create Your Account</a>
       </div>
     </section>
   </main>
