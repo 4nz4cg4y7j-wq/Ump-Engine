@@ -5,18 +5,19 @@ const { Pool } = require("pg");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SESSION_SECRET = process.env.SESSION_SECRET || "change-this-secret";
+const SESSION_SECRET = process.env.SESSION_SECRET || "dev-only-change-this-secret";
 const DATABASE_URL = process.env.DATABASE_URL;
 
 if (!DATABASE_URL) {
-  console.error("DATABASE_URL is missing. Add a Render PostgreSQL database and set DATABASE_URL.");
-  process.exit(1);
+  console.warn("DATABASE_URL is not set. Add a Render Postgres database before deploying.");
 }
 
-const pool = new Pool({
-  connectionString: DATABASE_URL,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false
-});
+const pool = DATABASE_URL
+  ? new Pool({
+      connectionString: DATABASE_URL,
+      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false
+    })
+  : null;
 
 app.use(express.json({ limit: "2mb" }));
 
@@ -33,9 +34,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:file", (req, res, next) => {
-  if (!STATIC_FILES.has(req.params.file)) return next();
+  if (!STATIC_FILES.has(req.params.file)) {
+    return next();
+  }
   res.sendFile(path.join(__dirname, req.params.file));
 });
+
+function requireDatabase() {
+  if (!pool) {
+    const error = new Error("Database is not configured.");
+    error.status = 503;
+    throw error;
+  }
+}
 
 function hashPassword(password, salt = crypto.randomBytes(16).toString("hex")) {
   const hash = crypto.pbkdf2Sync(password, salt, 120000, 64, "sha512").toString("hex");
@@ -44,7 +55,7 @@ function hashPassword(password, salt = crypto.randomBytes(16).toString("hex")) {
 
 function verifyPassword(password, salt, expectedHash) {
   const { hash } = hashPassword(password, salt);
-  return hash === expectedHash;
+  return crypto.timingSafeEqual(Buffer.from(hash, "hex"), Buffer.from(expectedHash, "hex"));
 }
 
 function signSession(userId) {
@@ -64,21 +75,36 @@ function signSession(userId) {
 function readCookies(header = "") {
   return header.split(";").reduce((cookies, cookie) => {
     const [key, ...value] = cookie.trim().split("=");
-    if (key) cookies[key] = decodeURIComponent(value.join("="));
+    if (key) {
+      cookies[key] = decodeURIComponent(value.join("="));
+    }
     return cookies;
   }, {});
 }
 
 function verifySessionToken(token) {
-  if (!token || !token.includes(".")) return null;
+  if (!token || !token.includes(".")) {
+    return null;
+  }
 
   const [payload, signature] = token.split(".");
-  const expected = crypto.createHmac("sha256", SESSION_SECRET).update(payload).digest("base64url");
+  const expected = crypto
+    .createHmac("sha256", SESSION_SECRET)
+    .update(payload)
+    .digest("base64url");
 
-  if (signature !== expected) return null;
+  if (Buffer.byteLength(signature) !== Buffer.byteLength(expected)) {
+    return null;
+  }
+
+  if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) {
+    return null;
+  }
 
   const session = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
-  if (!session.expiresAt || session.expiresAt < Date.now()) return null;
+  if (!session.expiresAt || session.expiresAt < Date.now()) {
+    return null;
+  }
 
   return session;
 }
@@ -96,10 +122,14 @@ function clearSessionCookie(res) {
 }
 
 async function currentUser(req) {
+  requireDatabase();
+
   const cookies = readCookies(req.headers.cookie);
   const session = verifySessionToken(cookies.oe_session);
 
-  if (!session) return null;
+  if (!session) {
+    return null;
+  }
 
   const result = await pool.query(
     "select id, name, email, role, created_at from users where id = $1",
@@ -125,6 +155,8 @@ async function requireUser(req, res, next) {
 }
 
 async function initDatabase() {
+  requireDatabase();
+
   await pool.query(`
     create table if not exists users (
       id text primary key,
@@ -172,73 +204,161 @@ async function initDatabase() {
       source text not null default 'single',
       created_at timestamptz not null default now()
     );
+
+    create table if not exists group_events (
+      id text primary key,
+      group_id text not null references groups(id) on delete cascade,
+      title text not null,
+      event_date text,
+      event_time text,
+      location text,
+      notes text,
+      created_at timestamptz not null default now()
+    );
+
+    create table if not exists group_reports (
+      id text primary key,
+      group_id text not null references groups(id) on delete cascade,
+      report_type text not null,
+      title text not null,
+      details text,
+      created_at timestamptz not null default now()
+    );
   `);
+
+  await pool.query("alter table groups add column if not exists type text not null default 'static'");
 }
 
-function publicUser(row) {
+function toPublicUser(row) {
   return {
     id: row.id,
     name: row.name,
     email: row.email,
-    role: row.role
+    role: row.role,
+    createdAt: row.created_at
   };
 }
 
-async function getGroups(userId) {
+function mapGroup(row) {
+  return {
+    id: row.id,
+    ownerEmail: row.owner_email,
+    name: row.name,
+    sport: row.sport,
+    startDate: row.start_date,
+    endDate: row.end_date,
+    type: row.type,
+    createdAt: row.created_at,
+    umpires: [],
+    games: [],
+    events: [],
+    reports: []
+  };
+}
+
+function mapUmpire(row) {
+  return {
+    id: row.id,
+    groupId: row.group_id,
+    name: row.name,
+    contact: row.contact || "",
+    availability: row.availability || "",
+    conflicts: row.conflicts || "",
+    abilities: row.abilities || "",
+    superiority: String(row.superiority || 3),
+    createdAt: row.created_at
+  };
+}
+
+function mapGame(row) {
+  return {
+    id: row.id,
+    groupId: row.group_id,
+    date: row.date || "",
+    time: row.time || "",
+    field: row.field || "",
+    teamOne: row.team_one,
+    teamTwo: row.team_two,
+    level: row.level || "",
+    umpireId: row.umpire_id || "",
+    source: row.source,
+    createdAt: row.created_at
+  };
+}
+
+function mapEvent(row) {
+  return {
+    id: row.id,
+    groupId: row.group_id,
+    title: row.title,
+    eventDate: row.event_date || "",
+    eventTime: row.event_time || "",
+    location: row.location || "",
+    notes: row.notes || "",
+    createdAt: row.created_at
+  };
+}
+
+function mapReport(row) {
+  return {
+    id: row.id,
+    groupId: row.group_id,
+    reportType: row.report_type,
+    title: row.title,
+    details: row.details || "",
+    createdAt: row.created_at
+  };
+}
+
+async function fetchGroupsForUser(userId) {
   const groupsResult = await pool.query(
-    "select * from groups where owner_id = $1 order by created_at desc",
+    `select g.*, u.email as owner_email
+     from groups g
+     join users u on u.id = g.owner_id
+     where g.owner_id = $1
+     order by g.created_at desc`,
     [userId]
   );
 
-  const groups = groupsResult.rows.map(group => ({
-    id: group.id,
-    name: group.name,
-    sport: group.sport,
-    startDate: group.start_date,
-    endDate: group.end_date,
-    type: group.type,
-    umpires: [],
-    games: []
-  }));
+  const groups = groupsResult.rows.map(mapGroup);
 
-  for (const group of groups) {
-    const umpires = await pool.query(
-      "select * from umpires where group_id = $1 order by created_at asc",
-      [group.id]
-    );
-
-    const games = await pool.query(
-      "select * from games where group_id = $1 order by date asc, time asc",
-      [group.id]
-    );
-
-    group.umpires = umpires.rows.map(umpire => ({
-      id: umpire.id,
-      name: umpire.name,
-      contact: umpire.contact || "",
-      availability: umpire.availability || "",
-      conflicts: umpire.conflicts || "",
-      abilities: umpire.abilities || "",
-      superiority: String(umpire.superiority || 3)
-    }));
-
-    group.games = games.rows.map(game => ({
-      id: game.id,
-      date: game.date || "",
-      time: game.time || "",
-      field: game.field || "",
-      teamOne: game.team_one,
-      teamTwo: game.team_two,
-      level: game.level || "",
-      umpireId: game.umpire_id || "",
-      source: game.source
-    }));
+  if (!groups.length) {
+    return [];
   }
+
+  const ids = groups.map(group => group.id);
+
+  const umpiresResult = await pool.query(
+    "select * from umpires where group_id = any($1::text[]) order by created_at asc",
+    [ids]
+  );
+
+  const gamesResult = await pool.query(
+    "select * from games where group_id = any($1::text[]) order by date asc, time asc, created_at asc",
+    [ids]
+  );
+
+  const eventsResult = await pool.query(
+    "select * from group_events where group_id = any($1::text[]) order by event_date asc, event_time asc, created_at asc",
+    [ids]
+  );
+
+  const reportsResult = await pool.query(
+    "select * from group_reports where group_id = any($1::text[]) order by created_at desc",
+    [ids]
+  );
+
+  const byId = new Map(groups.map(group => [group.id, group]));
+
+  umpiresResult.rows.forEach(row => byId.get(row.group_id)?.umpires.push(mapUmpire(row)));
+  gamesResult.rows.forEach(row => byId.get(row.group_id)?.games.push(mapGame(row)));
+  eventsResult.rows.forEach(row => byId.get(row.group_id)?.events.push(mapEvent(row)));
+  reportsResult.rows.forEach(row => byId.get(row.group_id)?.reports.push(mapReport(row)));
 
   return groups;
 }
 
-async function ownsGroup(groupId, userId) {
+async function assertGroupOwner(groupId, userId) {
   const result = await pool.query(
     "select id from groups where id = $1 and owner_id = $2",
     [groupId, userId]
@@ -247,8 +367,14 @@ async function ownsGroup(groupId, userId) {
   return Boolean(result.rows[0]);
 }
 
+app.get("/health", (req, res) => {
+  res.json({ ok: true });
+});
+
 app.post("/api/register", async (req, res, next) => {
   try {
+    requireDatabase();
+
     const firstName = String(req.body.firstName || "").trim();
     const lastName = String(req.body.lastName || "").trim();
     const email = String(req.body.email || "").trim().toLowerCase();
@@ -276,7 +402,7 @@ app.post("/api/register", async (req, res, next) => {
     );
 
     setSessionCookie(res, id);
-    res.status(201).json({ user: publicUser(result.rows[0]) });
+    res.status(201).json({ user: toPublicUser(result.rows[0]) });
   } catch (error) {
     next(error);
   }
@@ -284,6 +410,8 @@ app.post("/api/register", async (req, res, next) => {
 
 app.post("/api/login", async (req, res, next) => {
   try {
+    requireDatabase();
+
     const email = String(req.body.email || "").trim().toLowerCase();
     const password = String(req.body.password || "");
 
@@ -295,7 +423,7 @@ app.post("/api/login", async (req, res, next) => {
     }
 
     setSessionCookie(res, user.id);
-    res.json({ user: publicUser(user) });
+    res.json({ user: toPublicUser(user) });
   } catch (error) {
     next(error);
   }
@@ -307,12 +435,12 @@ app.post("/api/logout", (req, res) => {
 });
 
 app.get("/api/me", requireUser, (req, res) => {
-  res.json({ user: publicUser(req.user) });
+  res.json({ user: toPublicUser(req.user) });
 });
 
 app.get("/api/groups", requireUser, async (req, res, next) => {
   try {
-    res.json({ groups: await getGroups(req.user.id) });
+    res.json({ groups: await fetchGroupsForUser(req.user.id) });
   } catch (error) {
     next(error);
   }
@@ -320,23 +448,30 @@ app.get("/api/groups", requireUser, async (req, res, next) => {
 
 app.post("/api/groups", requireUser, async (req, res, next) => {
   try {
+    const name = String(req.body.name || "").trim();
+    const sport = String(req.body.sport || "").trim();
+    const startDate = String(req.body.startDate || "").trim();
+    const endDate = String(req.body.endDate || "").trim();
+    const type = String(req.body.type || "static").trim();
+
+    if (!name || !sport) {
+      return res.status(400).json({ error: "Group name and sport are required." });
+    }
+
+    if (!["static", "active"].includes(type)) {
+      return res.status(400).json({ error: "Group type must be static or active." });
+    }
+
     const id = crypto.randomUUID();
 
     await pool.query(
       `insert into groups (id, owner_id, name, sport, start_date, end_date, type)
-       values ($1, $2, $3, $4, $5, $6, 'static')`,
-      [
-        id,
-        req.user.id,
-        String(req.body.name || "").trim(),
-        String(req.body.sport || "").trim(),
-        String(req.body.startDate || "").trim(),
-        String(req.body.endDate || "").trim()
-      ]
+       values ($1, $2, $3, $4, $5, $6, $7)`,
+      [id, req.user.id, name, sport, startDate, endDate, type]
     );
 
     res.status(201).json({
-      groups: await getGroups(req.user.id),
+      groups: await fetchGroupsForUser(req.user.id),
       activeGroupId: id
     });
   } catch (error) {
@@ -346,8 +481,16 @@ app.post("/api/groups", requireUser, async (req, res, next) => {
 
 app.post("/api/groups/:groupId/umpires", requireUser, async (req, res, next) => {
   try {
-    if (!(await ownsGroup(req.params.groupId, req.user.id))) {
+    const ownsGroup = await assertGroupOwner(req.params.groupId, req.user.id);
+
+    if (!ownsGroup) {
       return res.status(404).json({ error: "Group not found." });
+    }
+
+    const name = String(req.body.name || "").trim();
+
+    if (!name) {
+      return res.status(400).json({ error: "Umpire name is required." });
     }
 
     await pool.query(
@@ -356,7 +499,7 @@ app.post("/api/groups/:groupId/umpires", requireUser, async (req, res, next) => 
       [
         crypto.randomUUID(),
         req.params.groupId,
-        String(req.body.name || "").trim(),
+        name,
         String(req.body.contact || "").trim(),
         String(req.body.availability || "").trim(),
         String(req.body.conflicts || "").trim(),
@@ -365,7 +508,7 @@ app.post("/api/groups/:groupId/umpires", requireUser, async (req, res, next) => 
       ]
     );
 
-    res.status(201).json({ groups: await getGroups(req.user.id) });
+    res.status(201).json({ groups: await fetchGroupsForUser(req.user.id) });
   } catch (error) {
     next(error);
   }
@@ -373,27 +516,50 @@ app.post("/api/groups/:groupId/umpires", requireUser, async (req, res, next) => 
 
 app.post("/api/groups/:groupId/games", requireUser, async (req, res, next) => {
   try {
-    if (!(await ownsGroup(req.params.groupId, req.user.id))) {
+    const ownsGroup = await assertGroupOwner(req.params.groupId, req.user.id);
+
+    if (!ownsGroup) {
       return res.status(404).json({ error: "Group not found." });
+    }
+
+    const teamOne = String(req.body.teamOne || "").trim();
+    const teamTwo = String(req.body.teamTwo || "").trim();
+
+    if (!teamOne || !teamTwo) {
+      return res.status(400).json({ error: "Both teams are required." });
+    }
+
+    const umpireId = String(req.body.umpireId || "").trim();
+
+    if (umpireId) {
+      const umpire = await pool.query(
+        "select id from umpires where id = $1 and group_id = $2",
+        [umpireId, req.params.groupId]
+      );
+
+      if (!umpire.rows[0]) {
+        return res.status(400).json({ error: "Selected umpire does not belong to this group." });
+      }
     }
 
     await pool.query(
       `insert into games (id, group_id, date, time, field, team_one, team_two, level, umpire_id, source)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, nullif($9, ''), 'single')`,
+       values ($1, $2, $3, $4, $5, $6, $7, $8, nullif($9, ''), $10)`,
       [
         crypto.randomUUID(),
         req.params.groupId,
         String(req.body.date || "").trim(),
         String(req.body.time || "").trim(),
         String(req.body.field || "").trim(),
-        String(req.body.teamOne || "").trim(),
-        String(req.body.teamTwo || "").trim(),
+        teamOne,
+        teamTwo,
         String(req.body.level || "").trim(),
-        String(req.body.umpireId || "").trim()
+        umpireId,
+        "single"
       ]
     );
 
-    res.status(201).json({ groups: await getGroups(req.user.id) });
+    res.status(201).json({ groups: await fetchGroupsForUser(req.user.id) });
   } catch (error) {
     next(error);
   }
@@ -401,11 +567,17 @@ app.post("/api/groups/:groupId/games", requireUser, async (req, res, next) => {
 
 app.post("/api/groups/:groupId/games/bulk", requireUser, async (req, res, next) => {
   try {
-    if (!(await ownsGroup(req.params.groupId, req.user.id))) {
+    const ownsGroup = await assertGroupOwner(req.params.groupId, req.user.id);
+
+    if (!ownsGroup) {
       return res.status(404).json({ error: "Group not found." });
     }
 
     const games = Array.isArray(req.body.games) ? req.body.games : [];
+
+    if (!games.length) {
+      return res.status(400).json({ error: "No games were provided." });
+    }
 
     for (const game of games) {
       await pool.query(
@@ -424,7 +596,10 @@ app.post("/api/groups/:groupId/games/bulk", requireUser, async (req, res, next) 
       );
     }
 
-    res.status(201).json({ groups: await getGroups(req.user.id) });
+    res.status(201).json({
+      groups: await fetchGroupsForUser(req.user.id),
+      imported: games.length
+    });
   } catch (error) {
     next(error);
   }
@@ -432,22 +607,100 @@ app.post("/api/groups/:groupId/games/bulk", requireUser, async (req, res, next) 
 
 app.patch("/api/groups/:groupId/games/:gameId", requireUser, async (req, res, next) => {
   try {
-    if (!(await ownsGroup(req.params.groupId, req.user.id))) {
+    const ownsGroup = await assertGroupOwner(req.params.groupId, req.user.id);
+
+    if (!ownsGroup) {
       return res.status(404).json({ error: "Group not found." });
+    }
+
+    const umpireId = String(req.body.umpireId || "").trim();
+
+    if (umpireId) {
+      const umpire = await pool.query(
+        "select id from umpires where id = $1 and group_id = $2",
+        [umpireId, req.params.groupId]
+      );
+
+      if (!umpire.rows[0]) {
+        return res.status(400).json({ error: "Selected umpire does not belong to this group." });
+      }
     }
 
     await pool.query(
       `update games
        set umpire_id = nullif($1, '')
        where id = $2 and group_id = $3`,
+      [umpireId, req.params.gameId, req.params.groupId]
+    );
+
+    res.json({ groups: await fetchGroupsForUser(req.user.id) });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/groups/:groupId/events", requireUser, async (req, res, next) => {
+  try {
+    const ownsGroup = await assertGroupOwner(req.params.groupId, req.user.id);
+
+    if (!ownsGroup) {
+      return res.status(404).json({ error: "Group not found." });
+    }
+
+    const title = String(req.body.title || "").trim();
+
+    if (!title) {
+      return res.status(400).json({ error: "Event title is required." });
+    }
+
+    await pool.query(
+      `insert into group_events (id, group_id, title, event_date, event_time, location, notes)
+       values ($1, $2, $3, $4, $5, $6, $7)`,
       [
-        String(req.body.umpireId || "").trim(),
-        req.params.gameId,
-        req.params.groupId
+        crypto.randomUUID(),
+        req.params.groupId,
+        title,
+        String(req.body.eventDate || "").trim(),
+        String(req.body.eventTime || "").trim(),
+        String(req.body.location || "").trim(),
+        String(req.body.notes || "").trim()
       ]
     );
 
-    res.json({ groups: await getGroups(req.user.id) });
+    res.status(201).json({ groups: await fetchGroupsForUser(req.user.id) });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/groups/:groupId/reports", requireUser, async (req, res, next) => {
+  try {
+    const ownsGroup = await assertGroupOwner(req.params.groupId, req.user.id);
+
+    if (!ownsGroup) {
+      return res.status(404).json({ error: "Group not found." });
+    }
+
+    const reportType = String(req.body.reportType || "").trim();
+    const title = String(req.body.title || "").trim();
+
+    if (!reportType || !title) {
+      return res.status(400).json({ error: "Report type and title are required." });
+    }
+
+    await pool.query(
+      `insert into group_reports (id, group_id, report_type, title, details)
+       values ($1, $2, $3, $4, $5)`,
+      [
+        crypto.randomUUID(),
+        req.params.groupId,
+        reportType,
+        title,
+        String(req.body.details || "").trim()
+      ]
+    );
+
+    res.status(201).json({ groups: await fetchGroupsForUser(req.user.id) });
   } catch (error) {
     next(error);
   }
@@ -459,11 +712,20 @@ app.get("*", (req, res) => {
 
 app.use((error, req, res, next) => {
   console.error(error);
-  res.status(500).json({ error: error.message || "Something went wrong." });
-});
 
-initDatabase().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Officials Engine server running on port ${PORT}`);
+  res.status(error.status || 500).json({
+    error: error.message || "Something went wrong."
   });
 });
+
+initDatabase()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Officials Engine server running on port ${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error("Failed to start server:", error);
+    process.exit(1);
+  });
+
