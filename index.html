@@ -1,40 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Officials Engine | Sports Officials Scheduling Platform</title>
-    <meta
-      name="description"
-      content="Officials Engine helps assigners schedule games, manage officials, and keep everyone organized in one powerful platform."
-    />
-    <style>
-      :root {
-        --bg: #020913;
-        --panel: #061a2d;
-        --panel-2: #08233d;
-        --line: rgba(134, 188, 255, 0.32);
-        --text: #f7fbff;
-        --muted: #d9e6f7;
-        --blue: #2478ff;
-        --blue-2: #0f58d9;
-        --green: #57d980;
-        --violet: #9663ff;
-        --shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
-      }
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Officials Engine | Home</title>
 
-      * {
-        box-sizing: border-box;
-      }
   <style>
     :root {
       --bg: #020913;
       --panel: #061a2d;
-      --panel-2: #08233d;
       --line: rgba(134, 188, 255, 0.32);
       --text: #f7fbff;
       --muted: #d9e6f7;
@@ -42,1524 +16,472 @@
       --blue-2: #0f58d9;
       --green: #57d980;
       --violet: #9663ff;
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
     }
 
-      html {
-        scroll-behavior: smooth;
-      }
     * {
       box-sizing: border-box;
     }
 
-      body {
-        margin: 0;
-        color: var(--text);
-        background:
-          radial-gradient(circle at 78% 7%, rgba(38, 120, 255, 0.28), transparent 28rem),
-          radial-gradient(circle at 13% 18%, rgba(0, 154, 255, 0.18), transparent 23rem),
-          var(--bg);
-        font-family:
-          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-      }
-    html {
-      scroll-behavior: smooth;
-    }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
     body {
       margin: 0;
       font-family: Inter, system-ui, Arial, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at 20% 0%, rgba(36, 120, 255, 0.20), transparent 35rem),
-        radial-gradient(circle at 90% 20%, rgba(150, 99, 255, 0.14), transparent 30rem),
-        var(--bg);
+      background: var(--bg);
     }
 
-      .site-header {
-        min-height: 116px;
-        background: rgba(1, 8, 17, 0.93);
-        border-bottom: 1px solid rgba(100, 164, 255, 0.12);
-      }
     a {
       color: inherit;
       text-decoration: none;
     }
 
-      .nav {
-        width: min(100% - 64px, 1440px);
-        min-height: 116px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 32px;
-      }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      min-height: 52px;
-      padding: 0 28px;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      color: #fff;
-      font-size: 1.05rem;
-      font-weight: 800;
-      background: linear-gradient(180deg, var(--blue), var(--blue-2));
-      box-shadow: 0 14px 30px rgba(36, 120, 255, 0.25);
-      transition: 0.2s;
-      white-space: nowrap;
-    }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 14px;
-        flex: 0 0 auto;
-      }
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-      .brand-mark {
-        width: 106px;
-        height: 82px;
-        flex: 0 0 auto;
-      }
-    .btn.outline {
-      background: rgba(2, 9, 19, 0.45);
-      border-color: rgba(255, 255, 255, 0.72);
-      box-shadow: inset 0 0 24px rgba(36, 120, 255, 0.12);
-    }
-
-      .brand-copy {
-        line-height: 0.9;
-        text-transform: uppercase;
-        letter-spacing: 0;
-      }
     .container {
-      width: min(100% - 48px, 1220px);
+      width: min(100% - 40px, 1200px);
       margin: auto;
     }
 
-      .brand-name {
-        display: block;
-        font-family: Impact, "Arial Black", sans-serif;
-        font-size: clamp(2.1rem, 3.1vw, 3rem);
-        color: #fff;
-        text-shadow: 0 3px 0 rgba(0, 0, 0, 0.32);
-      }
-    /* HEADER */
     header {
-      border-bottom: 1px solid rgba(100, 164, 255, 0.12);
-      background: rgba(2, 9, 19, 0.92);
-      backdrop-filter: blur(10px);
+      background: rgba(2, 9, 19, 0.95);
+      border-bottom: 1px solid rgba(100, 164, 255, 0.14);
     }
 
-      .brand-sub {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: var(--blue);
-        font-family: Impact, "Arial Black", sans-serif;
-        font-size: clamp(1rem, 1.6vw, 1.45rem);
-        letter-spacing: 0.33em;
-        margin-top: 7px;
-      }
     .nav {
-      min-height: 108px;
+      min-height: 96px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 32px;
+      gap: 28px;
     }
 
-      .brand-sub::before,
-      .brand-sub::after {
-        content: "";
-        display: block;
-        width: 38px;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--blue));
-      }
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-shrink: 0;
-    }
-
-      .brand-sub::after {
-        background: linear-gradient(90deg, var(--blue), transparent);
-      }
-    .logo-icon {
-      width: 78px;
-      height: 62px;
-    }
-
-      .nav-menu {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: clamp(20px, 2.6vw, 44px);
-        margin-left: auto;
-        font-size: 1.08rem;
-        font-weight: 500;
-      }
-    .logo-text strong {
-      display: block;
-      font-size: clamp(1.8rem, 3vw, 2.7rem);
-      line-height: 0.9;
+      font-size: 1.8rem;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-      .nav-menu a {
-        color: rgba(255, 255, 255, 0.9);
-      }
-    .logo-text span {
-      display: block;
-      margin-top: 5px;
+    .logo span {
       color: var(--blue);
-      font-size: 1.1rem;
-      font-weight: 900;
+      display: block;
+      font-size: 1rem;
       letter-spacing: 0.35em;
-      text-transform: uppercase;
     }
 
-      .nav-menu a:hover {
-        color: #fff;
-      }
     .menu {
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: clamp(18px, 3vw, 42px);
-      margin-left: auto;
-      color: rgba(255, 255, 255, 0.9);
+      gap: 34px;
       font-weight: 600;
     }
 
-      .actions {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-      }
     .menu a:hover {
-      color: #fff;
+      color: var(--blue);
     }
 
-      .button {
-        min-height: 51px;
-        border: 1px solid transparent;
-        border-radius: 8px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        padding: 0 27px;
-        color: #fff;
-        font-size: 1.05rem;
-        font-weight: 700;
-        background: linear-gradient(180deg, var(--blue), var(--blue-2));
-        box-shadow: 0 14px 30px rgba(20, 97, 230, 0.26);
-        white-space: nowrap;
-        transition:
-          transform 180ms ease,
-          box-shadow 180ms ease,
-          border-color 180ms ease;
-      }
-    .nav-actions {
+    .actions {
       display: flex;
-      align-items: center;
-      gap: 16px;
+      gap: 14px;
     }
 
-      .button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 18px 38px rgba(20, 97, 230, 0.34);
-      }
-    /* HERO */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 24px;
+      border-radius: 8px;
+      font-weight: 800;
+      background: linear-gradient(180deg, var(--blue), var(--blue-2));
+      border: 1px solid transparent;
+      box-shadow: 0 14px 30px rgba(36, 120, 255, 0.25);
+    }
+
+    .btn.outline {
+      background: rgba(2, 9, 19, 0.45);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: none;
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
-      min-height: 430px;
       background:
-        radial-gradient(circle at 99% 5%, rgba(255, 255, 255, 0.86) 0 14px, transparent 16px),
-        radial-gradient(circle at 95% 14%, rgba(72, 166, 255, 0.95) 0 10px, transparent 13px),
-        radial-gradient(circle at 1% 6%, rgba(255, 255, 255, 0.82) 0 13px, transparent 16px),
-        radial-gradient(ellipse at center bottom, rgba(54, 255, 151, 0.16), transparent 32%),
-        linear-gradient(180deg, rgba(4, 38, 74, 0.9), rgba(1, 13, 29, 0.96));
+        radial-gradient(circle at 95% 12%, rgba(36, 120, 255, 0.4), transparent 16rem),
+        radial-gradient(circle at 5% 10%, rgba(80, 180, 255, 0.3), transparent 14rem),
+        linear-gradient(180deg, #062747, #020913);
+      padding: 80px 0;
     }
 
-      .button.outline {
-        background: rgba(3, 12, 24, 0.45);
-        border-color: rgba(255, 255, 255, 0.7);
-        box-shadow: inset 0 0 26px rgba(44, 123, 255, 0.08);
-      }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(16deg, transparent 40%, rgba(53, 138, 255, 0.16) 41%, transparent 45%),
-        linear-gradient(-16deg, transparent 40%, rgba(53, 138, 255, 0.16) 41%, transparent 45%),
-        repeating-linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.025) 0,
-          rgba(255, 255, 255, 0.025) 2px,
-          transparent 2px,
-          transparent 18px
-        );
-      opacity: 0.78;
-    }
-
-      .button.outline:hover {
-        border-color: #fff;
-        box-shadow: inset 0 0 30px rgba(44, 123, 255, 0.17);
-      }
     .hero::after {
       content: "";
       position: absolute;
       left: 0;
       right: 0;
       bottom: 0;
-      height: 50px;
-      background:
-        linear-gradient(180deg, rgba(25, 93, 54, 0.08), rgba(39, 123, 73, 0.38)),
-        repeating-linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.035) 0,
-          rgba(255, 255, 255, 0.035) 1px,
-          transparent 1px,
-          transparent 5px
-        );
+      height: 48px;
+      background: linear-gradient(180deg, rgba(25, 93, 54, 0.1), rgba(39, 123, 73, 0.38));
     }
 
-      .icon {
-        width: 24px;
-        height: 24px;
-        flex: 0 0 auto;
-      }
     .hero-inner {
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.85fr);
+      grid-template-columns: 1fr 0.8fr;
       align-items: center;
-      gap: 40px;
-      min-height: 430px;
-      padding: 45px 0 78px;
+      gap: 50px;
     }
 
-      .hero {
-        position: relative;
-        min-height: 432px;
-        overflow: hidden;
-        background:
-          radial-gradient(circle at 99% 4%, rgba(255, 255, 255, 0.88) 0 0.9rem, transparent 1rem),
-          radial-gradient(circle at 95% 13%, rgba(64, 158, 255, 0.98) 0 0.7rem, transparent 0.82rem),
-          radial-gradient(circle at 1% 4%, rgba(255, 255, 255, 0.86) 0 0.82rem, transparent 1rem),
-          radial-gradient(ellipse at 50% 100%, rgba(41, 255, 156, 0.18), transparent 27%),
-          linear-gradient(180deg, rgba(2, 29, 58, 0.82), rgba(0, 13, 29, 0.9)),
-          #031323;
-      }
-    .hero-copy {
-      max-width: 620px;
-    }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(ellipse at 50% 98%, rgba(42, 124, 211, 0.22), transparent 48%),
-          linear-gradient(16deg, transparent 40%, rgba(53, 138, 255, 0.16) 41%, transparent 45%),
-          linear-gradient(-16deg, transparent 40%, rgba(53, 138, 255, 0.16) 41%, transparent 45%),
-          repeating-linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.02) 0,
-            rgba(255, 255, 255, 0.02) 2px,
-            transparent 2px,
-            transparent 18px
-          );
-        opacity: 0.88;
-      }
     h1 {
       margin: 0 0 18px;
       font-size: clamp(2.8rem, 5vw, 4.8rem);
       line-height: 1.05;
-      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0;
-      text-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+      font-weight: 900;
     }
 
-      .hero::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 48px;
-        background:
-          linear-gradient(180deg, rgba(25, 93, 54, 0.1), rgba(39, 123, 73, 0.36)),
-          repeating-linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0.035) 0,
-            rgba(255, 255, 255, 0.035) 1px,
-            transparent 1px,
-            transparent 5px
-          );
-        box-shadow: 0 -26px 70px rgba(17, 131, 255, 0.13);
-      }
     h1 span {
       color: var(--blue);
     }
 
-    .hero-copy p {
-      max-width: 540px;
-      margin: 0 0 28px;
+    .hero p {
+      max-width: 560px;
+      margin: 0 0 30px;
+      font-size: 1.25rem;
+      line-height: 1.5;
       color: #fff;
-      font-size: clamp(1.08rem, 1.8vw, 1.45rem);
-      line-height: 1.45;
     }
 
-    .hero-actions {
+    .hero-buttons {
       display: flex;
       flex-wrap: wrap;
-      gap: 24px;
+      gap: 22px;
     }
 
-    .hero-actions .btn {
-      min-width: 220px;
-      min-height: 64px;
-      font-size: 1.2rem;
+    .hero-buttons .btn {
+      min-width: 210px;
+      min-height: 62px;
+      font-size: 1.15rem;
     }
 
-      .hero-inner {
-        position: relative;
-        z-index: 1;
-        width: min(100% - 64px, 1320px);
-        min-height: 432px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: minmax(0, 0.96fr) minmax(390px, 0.84fr);
-        align-items: center;
-        gap: 42px;
-        padding: 38px 0 78px;
-      }
-    .whistle-wrap {
+    .whistle-card {
+      min-height: 300px;
       display: grid;
       place-items: center;
-      min-height: 330px;
     }
 
-      .hero-copy {
-        max-width: 620px;
-      }
     .whistle {
-      width: min(100%, 500px);
-      filter: drop-shadow(0 34px 25px rgba(0, 0, 0, 0.5));
+      width: min(100%, 360px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 18px solid var(--blue);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
     }
 
-      h1 {
-        margin: 0 0 15px;
-        color: #fff;
-        font-family: Impact, "Arial Black", sans-serif;
-        font-size: clamp(3rem, 5vw, 4.8rem);
-        line-height: 1.05;
-        letter-spacing: 0;
-        text-transform: uppercase;
-        text-shadow:
-          0 3px 0 rgba(0, 0, 0, 0.38),
-          0 12px 34px rgba(0, 0, 0, 0.55);
-      }
-    /* FEATURES */
+    .whistle-shape {
+      width: 230px;
+      height: 120px;
+      background: linear-gradient(145deg, #ffffff, #7e8794 55%, #111923);
+      border: 4px solid #f6f8fb;
+      border-radius: 55% 18% 18% 55%;
+      transform: rotate(-15deg);
+      position: relative;
+    }
+
+    .whistle-shape::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      bottom: -28px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #101821;
+      border: 10px solid #f6f8fb;
+    }
+
+    .whistle-shape::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      top: 28px;
+      width: 90px;
+      height: 34px;
+      background: #08101a;
+      border: 4px solid #eaf0f7;
+      border-radius: 6px;
+    }
+
     .features {
       background: linear-gradient(90deg, #051729, #092542 48%, #051729);
       border-top: 1px solid rgba(79, 148, 255, 0.18);
-      border-bottom: 1px solid rgba(79, 148, 255, 0.1);
+      border-bottom: 1px solid rgba(79, 148, 255, 0.12);
     }
 
-      h1 span {
-        color: var(--blue);
-      }
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      min-height: 130px;
     }
 
-      .hero-copy p {
-        max-width: 530px;
-        margin: 0 0 27px;
-        color: #fff;
-        font-size: clamp(1.08rem, 1.8vw, 1.45rem);
-        line-height: 1.42;
-        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.56);
-      }
     .feature {
-      display: grid;
-      grid-template-columns: 68px minmax(0, 1fr);
-      gap: 20px;
-      align-items: center;
-      padding: 25px 34px;
+      padding: 30px;
+      border-left: 1px solid rgba(149, 196, 255, 0.22);
     }
 
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 26px;
-      }
-    .feature + .feature {
-      border-left: 1px solid rgba(149, 196, 255, 0.24);
+    .feature:first-child {
+      border-left: 0;
     }
 
-      .hero-actions .button {
-        min-width: 233px;
-        min-height: 64px;
-        font-size: 1.22rem;
-      }
-    .feature svg {
-      width: 58px;
-      height: 58px;
-      color: var(--blue);
-      filter: drop-shadow(0 10px 18px rgba(36, 120, 255, 0.28));
-    }
-
-      .hero-art {
-        display: grid;
-        place-items: center;
-        min-height: 350px;
-      }
     .feature h2 {
-      margin: 0 0 6px;
-      font-size: 1.35rem;
-      line-height: 1.1;
+      margin: 0 0 8px;
       text-transform: uppercase;
+      font-size: 1.35rem;
     }
 
-      .hero-whistle {
-        width: min(100%, 490px);
-        filter: drop-shadow(0 34px 24px rgba(0, 0, 0, 0.45));
-      }
     .feature p {
       margin: 0;
       color: #fff;
-      font-size: 1rem;
-      line-height: 1.35;
+      line-height: 1.45;
     }
 
-      .feature-strip {
-        background: linear-gradient(90deg, #051729, #092542 48%, #051729);
-        border-top: 1px solid rgba(79, 148, 255, 0.18);
-        border-bottom: 1px solid rgba(79, 148, 255, 0.1);
-      }
-    /* PLANS PREVIEW */
-    .plans-preview {
-      padding: 28px 0 32px;
+    .plans {
+      padding: 34px 0;
       background: linear-gradient(180deg, #020d19, #020812);
     }
 
-      .feature-grid {
-        width: min(100% - 64px, 1220px);
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        align-items: center;
-        min-height: 130px;
-      }
-    .plans-preview h2 {
-      margin: 0 0 18px;
+    .plans h2 {
       text-align: center;
-      font-size: clamp(1.7rem, 2.5vw, 2.35rem);
+      margin: 0 0 22px;
       text-transform: uppercase;
+      font-size: clamp(1.7rem, 2.5vw, 2.35rem);
     }
 
-      .feature {
-        display: grid;
-        grid-template-columns: 72px minmax(0, 1fr);
-        gap: 20px;
-        align-items: center;
-        padding: 24px 40px;
-      }
     .plan-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
 
-      .feature + .feature {
-        border-left: 1px solid rgba(149, 196, 255, 0.26);
-      }
     .plan {
-      min-height: 170px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 105px;
-      align-items: center;
-      gap: 20px;
-      padding: 24px 28px;
+      padding: 26px;
       border: 1px solid var(--line);
       border-radius: 10px;
-      background:
-        linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.85));
+      background: linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.9));
     }
 
-      .feature svg {
-        width: 58px;
-        height: 58px;
-        color: var(--blue);
-        filter: drop-shadow(0 10px 18px rgba(36, 120, 255, 0.28));
-      }
-    .plan:nth-child(2) {
-      border-color: rgba(87, 217, 128, 0.48);
-    }
-
-      .feature h2 {
-        margin: 0 0 6px;
-        font-family: Impact, "Arial Black", sans-serif;
-        font-size: 1.42rem;
-        line-height: 1.08;
-        letter-spacing: 0;
-        text-transform: uppercase;
-      }
-    .plan:nth-child(3) {
-      border-color: rgba(150, 99, 255, 0.52);
-    }
-
-      .feature p {
-        margin: 0;
-        color: #fff;
-        font-size: 1.04rem;
-        line-height: 1.36;
-      }
     .plan h3 {
-      margin: 0 0 8px;
-      font-size: 1.2rem;
+      margin: 0 0 12px;
       text-transform: uppercase;
+      font-size: 1.25rem;
     }
 
-      .pricing {
-        background:
-          radial-gradient(circle at 18% 0, rgba(36, 120, 255, 0.16), transparent 23rem),
-          linear-gradient(180deg, #020d19, #020812);
-        padding: 25px 0 17px;
-      }
-    .blue {
-      color: var(--blue);
-    }
+    .blue { color: var(--blue); }
+    .green { color: var(--green); }
+    .violet { color: var(--violet); }
 
-      .pricing-inner {
-        width: min(100% - 64px, 1220px);
-        margin: 0 auto;
-      }
-    .green {
-      color: var(--green);
-    }
-
-      .pricing h2 {
-        margin: 0 0 12px;
-        text-align: center;
-        font-family: Impact, "Arial Black", sans-serif;
-        font-size: clamp(1.8rem, 2.6vw, 2.5rem);
-        letter-spacing: 0;
-        text-transform: uppercase;
-      }
-    .violet {
-      color: var(--violet);
-    }
-
-      .plans {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-      }
     .price {
-      margin-bottom: 6px;
-      font-size: 3.25rem;
-      line-height: 0.9;
+      margin-bottom: 10px;
+      font-size: 3rem;
       font-weight: 900;
     }
 
-      .plan {
-        min-height: 172px;
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) 124px;
-        align-items: center;
-        gap: 20px;
-        padding: 23px 31px;
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        background:
-          linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.8)),
-          rgba(4, 18, 32, 0.88);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
-      }
-    .price sup {
-      font-size: 1.4rem;
-    }
-
-      .plan:nth-child(2) {
-        border-color: rgba(87, 217, 128, 0.48);
-      }
     .price span {
-      color: #fff;
       font-size: 1rem;
       font-weight: 500;
+      color: var(--muted);
     }
 
-      .plan:nth-child(3) {
-        border-color: rgba(150, 99, 255, 0.52);
-      }
     .plan p {
       margin: 0;
       color: #fff;
-      line-height: 1.3;
+      line-height: 1.4;
     }
 
-      .plan-title {
-        margin: 0 0 8px;
-        font-family: Impact, "Arial Black", sans-serif;
-        font-size: 1.28rem;
-        line-height: 1.1;
-        text-transform: uppercase;
-      }
-    .plan-icon {
-      width: 104px;
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      color: var(--blue);
-      border: 2px solid currentColor;
-      background: radial-gradient(circle, rgba(36, 120, 255, 0.2), rgba(36, 120, 255, 0.08));
-    }
-
-      .plan-title.blue {
-        color: var(--blue);
-      }
-    .plan-icon.green {
-      color: var(--green);
-      background: radial-gradient(circle, rgba(87, 217, 128, 0.18), rgba(87, 217, 128, 0.07));
-    }
-
-      .plan-title.green {
-        color: var(--green);
-      }
-    .plan-icon.violet {
-      color: var(--violet);
-      background: radial-gradient(circle, rgba(150, 99, 255, 0.18), rgba(150, 99, 255, 0.07));
-    }
-
-      .plan-title.violet {
-        color: var(--violet);
-      }
-    .plan-icon svg {
-      width: 58px;
-      height: 58px;
-    }
-
-      .price {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 4px;
-        font-weight: 800;
-    /* CTA */
     .cta {
-      padding: 18px 0;
+      padding: 28px 0;
       background: linear-gradient(90deg, #082b4e, #021426 48%, #082b4e);
-      border-top: 1px solid rgba(102, 173, 255, 0.1);
     }
 
     .cta-inner {
-      width: min(100% - 48px, 850px);
-      margin: auto;
-      display: grid;
-      grid-template-columns: 64px minmax(0, 1fr) auto;
+      display: flex;
       align-items: center;
-      gap: 22px;
-    }
-
-    .cta svg {
-      width: 62px;
-      height: 62px;
-      color: #83bdff;
+      justify-content: space-between;
+      gap: 24px;
     }
 
     .cta p {
       margin: 0;
-      font-size: clamp(1.05rem, 2vw, 1.45rem);
-      line-height: 1.25;
+      font-size: 1.3rem;
+      line-height: 1.35;
     }
 
-    @media (max-width: 1080px) {
-      .nav {
-        flex-wrap: wrap;
-        justify-content: center;
+    footer {
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    @media (max-width: 900px) {
+      .nav,
+      .cta-inner {
+        flex-direction: column;
         padding: 20px 0;
-      }
-
-      .price .currency {
-        font-size: 1.7rem;
-        line-height: 1;
-        margin-top: 7px;
-        margin-right: 4px;
-      .menu {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-left: 0;
-      }
-
-      .price .amount {
-        font-size: 3.65rem;
-        line-height: 0.86;
-        letter-spacing: 0;
-      .hero-inner {
-        grid-template-columns: 1fr;
         text-align: center;
       }
 
-      .price .term {
-        align-self: flex-end;
-        margin-left: 7px;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 500;
-        padding-bottom: 4px;
-      .hero-copy {
-        max-width: none;
-      }
-
-      .plan p {
-        margin: 0;
-        color: #fff;
-        font-size: 1rem;
-        line-height: 1.25;
-      .hero-copy p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .plan-icon {
-        width: 114px;
-        aspect-ratio: 1;
-        display: grid;
-        place-items: center;
-        border-radius: 50%;
-        color: var(--blue);
-        background: radial-gradient(circle, rgba(36, 120, 255, 0.22), rgba(36, 120, 255, 0.08));
-        border: 2px solid currentColor;
-        box-shadow: inset 0 0 34px rgba(36, 120, 255, 0.2);
-      .hero-actions {
+      .menu,
+      .actions,
+      .hero-buttons {
+        flex-wrap: wrap;
         justify-content: center;
       }
 
-      .plan-icon.green {
-        color: var(--green);
-        background: radial-gradient(circle, rgba(87, 217, 128, 0.19), rgba(87, 217, 128, 0.07));
-      .whistle-wrap {
-        min-height: 260px;
-      }
-
-      .plan-icon.violet {
-        color: var(--violet);
-        background: radial-gradient(circle, rgba(150, 99, 255, 0.19), rgba(150, 99, 255, 0.08));
-      .whistle {
-        width: min(78vw, 430px);
-      }
-
-      .plan-icon svg {
-        width: 64px;
-        height: 64px;
+      .hero-inner,
       .feature-grid,
       .plan-grid {
         grid-template-columns: 1fr;
+        text-align: center;
       }
 
-      .cta {
-        background: linear-gradient(90deg, #082b4e, #021426 48%, #082b4e);
-        border-top: 1px solid rgba(102, 173, 255, 0.1);
-        padding: 17px 0 18px;
-      .feature + .feature {
+      .feature {
         border-left: 0;
-        border-top: 1px solid rgba(149, 196, 255, 0.24);
+        border-top: 1px solid rgba(149, 196, 255, 0.22);
+      }
+
+      .feature:first-child {
+        border-top: 0;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
       }
     }
 
-    @media (max-width: 640px) {
-      .container,
-      .cta-inner {
-        width: min(100% - 64px, 850px);
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 68px minmax(0, 1fr) auto;
-        align-items: center;
-        gap: 22px;
-        width: min(100% - 36px, 560px);
-      }
-
-      .cta svg {
-        width: 64px;
-        height: 64px;
-        color: #83bdff;
-      .logo-icon {
-        width: 62px;
-        height: 50px;
-      }
-
-      .cta p {
-        margin: 0;
-        font-size: clamp(1.1rem, 2vw, 1.5rem);
-        line-height: 1.22;
-      .logo-text strong {
-        font-size: 1.75rem;
-      }
-
-      .cta .button {
-        min-width: 278px;
-        min-height: 57px;
-      .logo-text span {
-        font-size: 0.88rem;
-      }
-
-      @media (max-width: 1120px) {
-        .nav {
-          width: min(100% - 32px, 980px);
-          flex-wrap: wrap;
-          justify-content: center;
-          padding: 18px 0;
-        }
-      .nav-actions,
-      .hero-actions {
+    @media (max-width: 560px) {
+      .menu,
+      .actions {
         width: 100%;
       }
 
-        .site-header,
-        .nav {
-          min-height: auto;
-        }
-      .nav-actions .btn,
-      .hero-actions .btn {
+      .btn {
         width: 100%;
       }
 
-        .nav-menu {
-          order: 3;
-          width: 100%;
-          justify-content: center;
-          flex-wrap: wrap;
-          margin-left: 0;
-        }
-      .feature {
-        grid-template-columns: 54px minmax(0, 1fr);
-        padding: 22px 0;
+      .whistle {
+        width: 280px;
       }
 
-        .hero-inner {
-          grid-template-columns: 1fr;
-          width: min(100% - 40px, 920px);
-          text-align: center;
-          gap: 8px;
-        }
-      .feature svg {
-        width: 48px;
-        height: 48px;
-      }
-
-        .hero-copy {
-          max-width: none;
-          margin: 0 auto;
-        }
-      .plan {
-        grid-template-columns: 1fr;
-        text-align: center;
-        justify-items: center;
-      }
-
-        .hero-copy p {
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .hero-actions {
-          justify-content: center;
-        }
-
-        .hero-art {
-          min-height: 265px;
-        }
-
-        .hero-whistle {
-          width: min(78vw, 430px);
-        }
-
-        .feature-grid,
-        .plans {
-          grid-template-columns: 1fr;
-        }
-
-        .feature-grid {
-          width: min(100% - 40px, 780px);
-          padding: 12px 0;
-        }
-      .cta-inner {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-        .feature {
-          padding: 22px 12px;
-        }
-
-        .feature + .feature {
-          border-left: 0;
-          border-top: 1px solid rgba(149, 196, 255, 0.2);
-        }
-
-        .pricing-inner {
-          width: min(100% - 40px, 780px);
-        }
-      .cta svg {
-        margin: auto;
+      .whistle-shape {
+        width: 190px;
+        height: 100px;
       }
     }
   </style>
 </head>
 
-      @media (max-width: 700px) {
-        .brand-mark {
-          width: 78px;
-          height: 62px;
-        }
 <body>
   <header>
     <div class="container nav">
-      <a class="logo" href="index.html" aria-label="Officials Engine home">
-        <svg class="logo-icon" viewBox="0 0 150 112" aria-hidden="true">
-          <defs>
-            <linearGradient id="logoBlue" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#44a6ff" />
-              <stop offset="1" stop-color="#064ed6" />
-            </linearGradient>
-            <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0" stop-color="#fff" />
-              <stop offset="0.46" stop-color="#d5d8dd" />
-              <stop offset="1" stop-color="#343d49" />
-            </linearGradient>
-          </defs>
-          <path d="M16 38h48M4 55h58M16 72h48" fill="none" stroke="url(#logoBlue)" stroke-width="4" stroke-linecap="round" />
-          <path d="M49 24a51 51 0 1 1-1 65" fill="none" stroke="url(#logoBlue)" stroke-width="6" stroke-linecap="round" />
-          <path d="M49 45 89 31l49 17-12 36-62 3c-15 1-30-8-36-21z" fill="url(#metal)" stroke="#f4f7fb" stroke-width="2" />
-          <path d="M91 31 73 46l34 5 31-3z" fill="#101722" />
-          <circle cx="60" cy="69" r="18" fill="#121922" stroke="#f5f8fb" stroke-width="5" />
-          <circle cx="60" cy="69" r="10" fill="#9da8b5" />
-        </svg>
-        <span class="logo-text">
-          <strong>Officials</strong>
-          <span>Engine</span>
-        </span>
+      <a class="logo" href="index.html">
+        Officials
+        <span>Engine</span>
       </a>
 
-        .brand-name {
-          font-size: 2rem;
-        }
-      <nav class="menu" aria-label="Main navigation">
+      <nav class="menu">
         <a href="#features">Features</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="#how-it-works">How It Works</a>
+        <a href="./pricing.html">Pricing</a>
+        <a href="#plans">How It Works</a>
         <a href="#about">About Us</a>
       </nav>
 
-        .brand-sub {
-          font-size: 0.9rem;
-          gap: 8px;
-        }
-
-        .brand-sub::before,
-        .brand-sub::after {
-          width: 20px;
-        }
-      <div class="nav-actions">
+      <div class="actions">
         <a class="btn outline" href="/login">Login</a>
         <a class="btn" href="/get-started">Get Started</a>
       </div>
     </div>
   </header>
 
-        .nav-menu {
-          gap: 16px;
-          font-size: 0.97rem;
-        }
   <main>
     <section class="hero">
       <div class="container hero-inner">
-        <div class="hero-copy">
+        <div>
           <h1>The Complete Platform For <span>Sports Officials</span></h1>
           <p>
             Officials Engine helps assigners schedule games, manage officials,
             and keep everyone organized - all in one powerful platform.
           </p>
-          <div class="hero-actions">
-            <a class="btn" href="/get-started">
-              Get Started
-              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </a>
-            <a class="btn outline" href="/login">
-              Login
-              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="7.5" r="4" fill="currentColor" />
-                <path d="M20 21a8 8 0 0 0-16 0" fill="currentColor" />
-              </svg>
-            </a>
+
+          <div class="hero-buttons">
+            <a class="btn" href="/get-started">Get Started</a>
+            <a class="btn outline" href="/login">Login</a>
           </div>
         </div>
 
-        .actions {
-          width: 100%;
-          justify-content: center;
-          gap: 12px;
-        }
-
-        .actions .button {
-          min-width: 136px;
-          padding: 0 18px;
-        }
-
-        .hero {
-          min-height: auto;
-        }
-
-        .hero-inner {
-          min-height: auto;
-          padding: 44px 0 66px;
-        }
-
-        h1 {
-          font-size: clamp(2.45rem, 12vw, 3.6rem);
-        }
-
-        .hero-actions .button {
-          width: 100%;
-          min-width: 0;
-        }
-
-        .feature {
-          grid-template-columns: 56px minmax(0, 1fr);
-          gap: 15px;
-        }
-
-        .feature svg {
-          width: 48px;
-          height: 48px;
-        }
-
-        .plan {
-          grid-template-columns: 1fr;
-          text-align: center;
-          justify-items: center;
-          padding: 25px 22px;
-        }
-
-        .price {
-          justify-content: center;
-        }
-
-        .cta-inner {
-          width: min(100% - 40px, 560px);
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-
-        .cta svg {
-          margin: 0 auto;
-        }
-
-        .cta .button {
-          min-width: 0;
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="nav" aria-label="Main navigation">
-        <a class="brand" href="#top" aria-label="Officials Engine home">
-          <svg class="brand-mark" viewBox="0 0 150 112" role="img" aria-label="Officials Engine whistle logo">
-        <div class="whistle-wrap" aria-hidden="true">
-          <svg class="whistle" viewBox="0 0 620 450">
-            <defs>
-              <linearGradient id="logoBlue" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#44a6ff" />
-                <stop offset="1" stop-color="#064ed6" />
-              <linearGradient id="ringBlue" x1="105" x2="484" y1="84" y2="367">
-                <stop offset="0" stop-color="#48b4ff" />
-                <stop offset="0.5" stop-color="#2478ff" />
-                <stop offset="1" stop-color="#073bb7" />
-              </linearGradient>
-              <linearGradient id="metal" x1="0" x2="1" y1="0" y2="1">
-              <linearGradient id="whistleMetal" x1="174" x2="498" y1="94" y2="341">
-                <stop offset="0" stop-color="#fff" />
-                <stop offset="0.46" stop-color="#d5d8dd" />
-                <stop offset="1" stop-color="#343d49" />
-                <stop offset="0.34" stop-color="#eff2f6" />
-                <stop offset="0.55" stop-color="#9ea8b5" />
-                <stop offset="0.8" stop-color="#202a37" />
-                <stop offset="1" stop-color="#080d14" />
-              </linearGradient>
-              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#000" flood-opacity="0.45" />
-              </filter>
-            </defs>
-            <path d="M16 38h48M4 55h58M16 72h48" fill="none" stroke="url(#logoBlue)" stroke-width="4" stroke-linecap="round" />
-            <path d="M49 24a51 51 0 1 1-1 65" fill="none" stroke="url(#logoBlue)" stroke-width="6" stroke-linecap="round" />
-            <path d="M49 45 89 31l49 17-12 36-62 3c-15 1-30-8-36-21z" fill="url(#metal)" stroke="#f4f7fb" stroke-width="2" />
-            <path d="M91 31 73 46l34 5 31-3z" fill="#101722" />
-            <circle cx="60" cy="69" r="18" fill="#121922" stroke="#f5f8fb" stroke-width="5" />
-            <circle cx="60" cy="69" r="10" fill="#9da8b5" />
-          </svg>
-          <span class="brand-copy">
-            <span class="brand-name">Officials</span>
-            <span class="brand-sub">Engine</span>
-          </span>
-        </a>
-
-        <div class="nav-menu">
-          <a href="#features">Features</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="#how-it-works">How It Works</a>
-          <a href="#about">About Us</a>
+        <div class="whistle-card">
+          <div class="whistle">
+            <div class="whistle-shape"></div>
+          </div>
         </div>
-            <path d="M202 101a198 198 0 0 1 380 40" fill="none" stroke="#75cfff" stroke-width="30" />
-            <path d="M202 101a198 198 0 0 1 380 40" fill="none" stroke="url(#ringBlue)" stroke-width="22" />
-            <path d="M170 303a199 199 0 0 0 353 69" fill="none" stroke="url(#ringBlue)" stroke-width="24" />
-            <path d="M42 221h97M17 255h110M62 292h68" fill="none" stroke="#2c8cff" stroke-width="13" stroke-linecap="round" />
-
-        <div class="actions">
-          <a class="button outline" href="/login">Login</a>
-          <a class="button" href="/get-started">Get Started</a>
-            <g filter="url(#softShadow)">
-              <circle cx="287" cy="111" r="48" fill="#121923" stroke="#f7f8fb" stroke-width="11" />
-              <circle cx="287" cy="111" r="34" fill="#07101b" stroke="#7c8795" stroke-width="7" />
-              <path d="M241 154 454 119l126 38 14 65-155 99-170 3c-57 1-104-41-110-98z" fill="url(#whistleMetal)" stroke="#f9fbff" stroke-width="5" stroke-linejoin="round" />
-              <path d="M391 152 579 157l15 65-158 18-57-61z" fill="#111924" stroke="#eef4fa" stroke-width="5" stroke-linejoin="round" />
-              <path d="M274 161 349 128l112 13-82 39z" fill="#101721" stroke="#e8edf5" stroke-width="4" stroke-linejoin="round" />
-              <path d="M264 222 379 178l61 61-44 83-121-1c-42-14-63-47-60-87z" fill="#131c28" opacity="0.88" />
-              <circle cx="270" cy="297" r="62" fill="#0d141d" stroke="#f5f7fb" stroke-width="12" />
-              <circle cx="270" cy="297" r="38" fill="#a6afba" stroke="#242d38" stroke-width="4" />
-              <path d="M399 238 572 219" fill="none" stroke="#111924" stroke-width="22" stroke-linecap="round" />
-            </g>
-          </svg>
-        </div>
-      </nav>
-    </header>
       </div>
     </section>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="homepage-title">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <h1 id="homepage-title">
-              The Complete Platform<br />
-              For <span>Sports Officials</span>
-            </h1>
-            <p>
-              Officials Engine helps assigners schedule games, manage officials, and keep everyone
-              organized &mdash; all in one powerful platform.
-            </p>
-            <div class="hero-actions">
-              <a class="button" href="/get-started">
-                Get Started
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </a>
-              <a class="button outline" href="/login">
-                Login
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20 21a8 8 0 0 0-16 0" fill="currentColor" opacity="0.96" />
-                  <circle cx="12" cy="7.5" r="4" fill="currentColor" />
-                </svg>
-              </a>
-            </div>
     <section class="features" id="features">
       <div class="container feature-grid">
         <article class="feature">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="10" y="13" width="44" height="43" rx="5" fill="none" stroke="currentColor" stroke-width="5" />
-            <path d="M20 7v13M44 7v13M11 25h42" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
-            <path d="M20 34h6v6h-6zM30 34h6v6h-6zM40 34h6v6h-6zM20 45h6v6h-6zM30 45h6v6h-6zM40 45h6v6h-6z" fill="currentColor" />
-          </svg>
-          <div>
-            <h2>Assign Games</h2>
-            <p>Create and assign games in just a few clicks.</p>
-          </div>
+          <h2>Assign Games</h2>
+          <p>Create and assign games in just a few clicks.</p>
         </article>
 
-          <div class="hero-art" aria-hidden="true">
-            <svg class="hero-whistle" viewBox="0 0 620 450">
-              <defs>
-                <linearGradient id="ringBlue" x1="105" x2="484" y1="84" y2="367">
-                  <stop offset="0" stop-color="#48b4ff" />
-                  <stop offset="0.5" stop-color="#2478ff" />
-                  <stop offset="1" stop-color="#073bb7" />
-                </linearGradient>
-                <linearGradient id="whistleMetal" x1="174" x2="498" y1="94" y2="341">
-                  <stop offset="0" stop-color="#fff" />
-                  <stop offset="0.34" stop-color="#eff2f6" />
-                  <stop offset="0.55" stop-color="#9ea8b5" />
-                  <stop offset="0.8" stop-color="#202a37" />
-                  <stop offset="1" stop-color="#080d14" />
-                </linearGradient>
-                <linearGradient id="edgeMetal" x1="236" x2="390" y1="128" y2="333">
-                  <stop offset="0" stop-color="#232d39" />
-                  <stop offset="1" stop-color="#03070c" />
-                </linearGradient>
-                <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#000" flood-opacity="0.45" />
-                </filter>
-              </defs>
         <article class="feature">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <circle cx="32" cy="24" r="10" fill="currentColor" />
-            <circle cx="16" cy="27" r="8" fill="currentColor" opacity="0.84" />
-            <circle cx="48" cy="27" r="8" fill="currentColor" opacity="0.84" />
-            <path d="M16 38c-9 0-14 5-14 14v3h21v-6c0-5 2-9 5-11zM48 38c9 0 14 5 14 14v3H41v-6c0-5-2-9-5-11z" fill="currentColor" opacity="0.84" />
-            <path d="M32 38c-11 0-20 7-20 18v3h40v-3c0-11-9-18-20-18z" fill="currentColor" />
-          </svg>
-          <div>
-            <h2>Manage Officials</h2>
-            <p>Organize officials into groups and manage availability.</p>
-          </div>
+          <h2>Manage Officials</h2>
+          <p>Organize officials into groups and manage availability.</p>
         </article>
 
-              <path d="M202 101a198 198 0 0 1 380 40" fill="none" stroke="#75cfff" stroke-width="30" stroke-linecap="butt" />
-              <path d="M202 101a198 198 0 0 1 380 40" fill="none" stroke="url(#ringBlue)" stroke-width="22" stroke-linecap="butt" />
-              <path d="M170 303a199 199 0 0 0 353 69" fill="none" stroke="#0a54d6" stroke-width="28" stroke-linecap="butt" />
-              <path d="M170 303a199 199 0 0 0 353 69" fill="none" stroke="url(#ringBlue)" stroke-width="20" stroke-linecap="butt" />
-
-              <path d="M42 221h97M17 255h110M62 292h68" fill="none" stroke="#2c8cff" stroke-width="13" stroke-linecap="round" />
-              <path d="M42 221h97M17 255h110M62 292h68" fill="none" stroke="#78c7ff" stroke-width="4" stroke-linecap="round" />
-
-              <g filter="url(#softShadow)">
-                <circle cx="287" cy="111" r="48" fill="#121923" stroke="#f7f8fb" stroke-width="11" />
-                <circle cx="287" cy="111" r="34" fill="#07101b" stroke="#7c8795" stroke-width="7" />
-                <path d="M241 154 454 119l126 38 14 65-155 99-170 3c-57 1-104-41-110-98z" fill="url(#whistleMetal)" stroke="#f9fbff" stroke-width="5" stroke-linejoin="round" />
-                <path d="M391 152 579 157l15 65-158 18-57-61z" fill="#111924" stroke="#eef4fa" stroke-width="5" stroke-linejoin="round" />
-                <path d="M274 161 349 128l112 13-82 39z" fill="#101721" stroke="#e8edf5" stroke-width="4" stroke-linejoin="round" />
-                <path d="M279 162 317 191l65-10 78-39-112-14z" fill="#0a1018" opacity="0.8" />
-                <path d="M264 222 379 178l61 61-44 83-121-1c-42-14-63-47-60-87z" fill="url(#edgeMetal)" opacity="0.82" />
-                <circle cx="270" cy="297" r="62" fill="#0d141d" stroke="#f5f7fb" stroke-width="12" />
-                <circle cx="270" cy="297" r="38" fill="#a6afba" stroke="#242d38" stroke-width="4" />
-                <path d="M396 240 441 323" fill="none" stroke="#dce3eb" stroke-width="4" opacity="0.72" />
-                <path d="M399 238 572 219" fill="none" stroke="#111924" stroke-width="22" stroke-linecap="round" />
-              </g>
-            </svg>
         <article class="feature">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <rect x="15" y="11" width="34" height="46" rx="4" fill="none" stroke="currentColor" stroke-width="5" />
-            <path d="M24 10h16v9H24z" fill="var(--panel)" stroke="currentColor" stroke-width="5" stroke-linejoin="round" />
-            <path d="M25 31h2M25 41h2M25 50h2M34 31h10M34 41h10M34 50h10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
-          </svg>
-          <div>
-            <h2>Track Schedules</h2>
-            <p>Everyone stays informed with real-time updates.</p>
-          </div>
-        </div>
-      </section>
+          <h2>Track Schedules</h2>
+          <p>Everyone stays informed with real-time updates.</p>
         </article>
       </div>
     </section>
 
-      <section class="feature-strip" id="features" aria-label="Platform features">
-        <div class="feature-grid">
-          <article class="feature">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="10" y="13" width="44" height="43" rx="5" fill="none" stroke="currentColor" stroke-width="5" />
-              <path d="M20 7v13M44 7v13M11 25h42" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
-              <path d="M20 34h6v6h-6zM30 34h6v6h-6zM40 34h6v6h-6zM20 45h6v6h-6zM30 45h6v6h-6zM40 45h6v6h-6z" fill="currentColor" />
-            </svg>
-    <section class="plans-preview" id="how-it-works">
+    <section class="plans" id="plans">
       <div class="container">
         <h2>Choose The Plan That Works For You</h2>
+
         <div class="plan-grid">
           <article class="plan">
-            <div>
-              <h2>Assign Games</h2>
-              <p>Create and assign games<br />in just a few clicks.</p>
-              <h3 class="blue">Assign Plan</h3>
-              <div class="price"><sup>$</sup>5 <span>/month</span></div>
-              <p>Perfect for assigners who just need the basics.</p>
-            </div>
-            <div class="plan-icon">
-              <svg viewBox="0 0 64 64" aria-hidden="true">
-                <rect x="12" y="13" width="40" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="5" />
-                <path d="M21 8v12M43 8v12M13 25h38" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
-                <path d="M22 35h6v6h-6zM36 35h6v6h-6zM22 45h6v6h-6zM36 45h6v6h-6z" fill="currentColor" />
-              </svg>
-            </div>
+            <h3 class="blue">Assign Plan</h3>
+            <div class="price">$5 <span>/month</span></div>
+            <p>Perfect for assigners who just need the basics.</p>
           </article>
 
-          <article class="feature">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <circle cx="32" cy="24" r="10" fill="currentColor" />
-              <circle cx="16" cy="27" r="8" fill="currentColor" opacity="0.84" />
-              <circle cx="48" cy="27" r="8" fill="currentColor" opacity="0.84" />
-              <path d="M16 38c-9 0-14 5-14 14v3h21v-6c0-5 2-9 5-11zM48 38c9 0 14 5 14 14v3H41v-6c0-5-2-9-5-11z" fill="currentColor" opacity="0.84" />
-              <path d="M32 38c-11 0-20 7-20 18v3h40v-3c0-11-9-18-20-18z" fill="currentColor" />
-            </svg>
           <article class="plan">
-            <div>
-              <h2>Manage Officials</h2>
-              <p>Organize officials into groups<br />and manage availability.</p>
-              <h3 class="green">AI Engine Plan</h3>
-              <div class="price"><sup>$</sup>7 <span>/month</span></div>
-              <p>Add AI-powered tools to optimize assignments.</p>
-            </div>
-            <div class="plan-icon green">
-              <svg viewBox="0 0 64 64" aria-hidden="true">
-                <path d="M30 12c-8-5-18 1-18 10 0 2 .4 4 1.5 5.6A11 11 0 0 0 10 48c1.8 7 11 9 16 4 2 4 7 4 9 0V16c0-3-2-4-5-4z" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M34 16c0-3 2-4 5-4 8-5 18 1 18 10 0 2-.4 4-1.5 5.6A11 11 0 0 1 58 48c-1.8 7-11 9-16 4-2 4-7 4-8 0z" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </div>
+            <h3 class="green">AI Engine Plan</h3>
+            <div class="price">$7 <span>/month</span></div>
+            <p>Add AI-powered tools to optimize assignments.</p>
           </article>
 
-          <article class="feature">
-            <svg viewBox="0 0 64 64" aria-hidden="true">
-              <rect x="15" y="11" width="34" height="46" rx="4" fill="none" stroke="currentColor" stroke-width="5" />
-              <path d="M24 10h16v9H24z" fill="var(--panel)" stroke="currentColor" stroke-width="5" stroke-linejoin="round" />
-              <path d="M25 31h2M25 41h2M25 50h2M34 31h10M34 41h10M34 50h10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
-            </svg>
           <article class="plan">
-            <div>
-              <h2>Track Schedules</h2>
-              <p>Everyone stays informed<br />with real-time updates.</p>
-              <h3 class="violet">Full Platform</h3>
-              <div class="price"><sup>$</sup>10 <span>/month</span></div>
-              <p>Everything you need in one complete solution.</p>
-            </div>
-            <div class="plan-icon violet">
-              <svg viewBox="0 0 64 64" aria-hidden="true">
-                <path d="M32 7 52 15v14c0 15-8 24-20 30-12-6-20-15-20-30V15z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" />
-                <path d="m32 21 4 8 9 1-6.5 6 1.8 9L32 40l-8.3 5 1.8-9-6.5-6 9-1z" fill="currentColor" />
-              </svg>
-            </div>
+            <h3 class="violet">Full Platform</h3>
+            <div class="price">$10 <span>/month</span></div>
+            <p>Everything you need in one complete solution.</p>
           </article>
         </div>
-      </section>
       </div>
     </section>
 
-      <section class="pricing" id="pricing" aria-labelledby="pricing-title">
-        <div class="pricing-inner">
-          <h2 id="pricing-title">Choose The Plan That Works For You</h2>
-          <div class="plans">
-            <article class="plan">
-              <div>
-                <h3 class="plan-title blue">Assign Plan</h3>
-                <div class="price">
-                  <span class="currency">$</span>
-                  <span class="amount">5</span>
-                  <span class="term">/month</span>
-                </div>
-                <p>Perfect for assigners who<br />just need the basics.</p>
-              </div>
-              <div class="plan-icon">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <rect x="12" y="13" width="40" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="5" />
-                  <path d="M21 8v12M43 8v12M13 25h38" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
-                  <path d="M22 35h6v6h-6zM36 35h6v6h-6zM22 45h6v6h-6zM36 45h6v6h-6z" fill="currentColor" />
-                </svg>
-              </div>
-            </article>
-
-            <article class="plan">
-              <div>
-                <h3 class="plan-title green">AI Engine Plan</h3>
-                <div class="price">
-                  <span class="currency">$</span>
-                  <span class="amount">7</span>
-                  <span class="term">/month</span>
-                </div>
-                <p>Add AI-powered tools<br />to optimize assignments.</p>
-              </div>
-              <div class="plan-icon green">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <path d="M30 12c-8-5-18 1-18 10 0 2 .4 4 1.5 5.6A11 11 0 0 0 10 48c1.8 7 11 9 16 4 2 4 7 4 9 0V16c0-3-2-4-5-4z" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M34 16c0-3 2-4 5-4 8-5 18 1 18 10 0 2-.4 4-1.5 5.6A11 11 0 0 1 58 48c-1.8 7-11 9-16 4-2 4-7 4-8 0z" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M23 25c5 0 8 3 8 8M18 42c5 0 8 3 8 8M41 25c-5 0-8 3-8 8M46 42c-5 0-8 3-8 8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
-                </svg>
-              </div>
-            </article>
-
-            <article class="plan">
-              <div>
-                <h3 class="plan-title violet">Full Platform</h3>
-                <div class="price">
-                  <span class="currency">$</span>
-                  <span class="amount">10</span>
-                  <span class="term">/month</span>
-                </div>
-                <p>Everything you need<br />in one complete solution.</p>
-              </div>
-              <div class="plan-icon violet">
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  <path d="M32 7 52 15v14c0 15-8 24-20 30-12-6-20-15-20-30V15z" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" />
-                  <path d="m32 21 4 8 9 1-6.5 6 1.8 9L32 40l-8.3 5 1.8-9-6.5-6 9-1z" fill="currentColor" />
-                </svg>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="cta" id="about" aria-label="Create your account">
-        <div class="cta-inner">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <circle cx="32" cy="22" r="9" fill="currentColor" />
-            <circle cx="16" cy="25" r="8" fill="currentColor" opacity="0.8" />
-            <circle cx="48" cy="25" r="8" fill="currentColor" opacity="0.8" />
-            <path d="M16 37C7 37 2 42 2 51v4h20v-6c0-5 2-9 6-12zM48 37c9 0 14 5 14 14v4H42v-6c0-5-2-9-6-12z" fill="currentColor" opacity="0.8" />
-            <path d="M32 36c-11 0-20 7-20 19v4h40v-4c0-12-9-19-20-19z" fill="currentColor" />
-          </svg>
-          <p>Join hundreds of assigners and officials<br />who trust Officials Engine every day.</p>
-          <a class="button" href="/get-started">
-            Create Your Account
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </a>
-        </div>
-      </section>
-    </main>
-  </body>
     <section class="cta" id="about">
-      <div class="cta-inner">
-        <svg viewBox="0 0 64 64" aria-hidden="true">
-          <circle cx="32" cy="22" r="9" fill="currentColor" />
-          <circle cx="16" cy="25" r="8" fill="currentColor" opacity="0.8" />
-          <circle cx="48" cy="25" r="8" fill="currentColor" opacity="0.8" />
-          <path d="M16 37C7 37 2 42 2 51v4h20v-6c0-5 2-9 6-12zM48 37c9 0 14 5 14 14v4H42v-6c0-5-2-9-6-12z" fill="currentColor" opacity="0.8" />
-          <path d="M32 36c-11 0-20 7-20 19v4h40v-4c0-12-9-19-20-19z" fill="currentColor" />
-        </svg>
+      <div class="container cta-inner">
         <p>Join hundreds of assigners and officials who trust Officials Engine every day.</p>
         <a class="btn" href="/get-started">Create Your Account</a>
       </div>
     </section>
   </main>
+
+  <footer>
+    &copy; 2026 Officials Engine. All rights reserved.
+  </footer>
 </body>
 </html>
+
