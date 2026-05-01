@@ -8,8 +8,6 @@
   <style>
     :root {
       --bg: #020913;
-      --panel: #061a2d;
-      --panel-2: #08233d;
       --line: rgba(134, 188, 255, 0.32);
       --text: #f7fbff;
       --muted: #d9e6f7;
@@ -41,25 +39,24 @@
 
     header {
       border-bottom: 1px solid rgba(100, 164, 255, 0.12);
-      background: rgba(2, 9, 19, 0.85);
-      backdrop-filter: blur(10px);
+      background: rgba(2, 9, 19, 0.9);
     }
 
     .nav {
-      min-height: 96px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       width: min(100% - 40px, 1200px);
-      max-width: 1200px;
+      min-height: 96px;
       margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 20px;
     }
 
     .logo {
-      font-weight: 800;
-      letter-spacing: 1px;
       font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .logo span {
@@ -69,8 +66,7 @@
     .menu {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: clamp(16px, 2.4vw, 34px);
+      gap: 28px;
       margin-left: auto;
       color: rgba(255, 255, 255, 0.9);
       font-weight: 600;
@@ -91,13 +87,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 18px;
+      min-height: 48px;
+      padding: 0 20px;
       border-radius: 8px;
-      font-weight: 700;
       border: 1px solid transparent;
+      color: #fff;
+      font-weight: 800;
       background: linear-gradient(180deg, var(--blue), var(--blue-2));
       box-shadow: 0 14px 30px rgba(36, 120, 255, 0.25);
-      transition: 0.2s;
       white-space: nowrap;
     }
 
@@ -107,18 +104,14 @@
       box-shadow: none;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
     .hero {
       text-align: center;
       padding: 70px 20px 30px;
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
       margin: 0;
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 900;
       text-transform: uppercase;
     }
@@ -148,14 +141,13 @@
     }
 
     .card {
-      background:
-        linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.9));
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 28px;
-      box-shadow: var(--shadow);
       position: relative;
       overflow: hidden;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.9));
+      box-shadow: var(--shadow);
       transition: 0.25s;
     }
 
@@ -189,15 +181,15 @@
     }
 
     .price span {
+      color: var(--muted);
       font-size: 1.1rem;
       font-weight: 500;
-      color: var(--muted);
     }
 
     .desc {
+      margin-bottom: 20px;
       color: var(--muted);
       line-height: 1.4;
-      margin-bottom: 20px;
     }
 
     .featured {
@@ -209,27 +201,26 @@
       position: absolute;
       top: 12px;
       right: 12px;
-      font-size: 0.7rem;
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(87, 217, 128, 0.15);
       color: var(--green);
-      border: 1px solid rgba(87, 217, 128, 0.4);
+      font-size: 0.7rem;
       letter-spacing: 0.1em;
+      background: rgba(87, 217, 128, 0.15);
+      border: 1px solid rgba(87, 217, 128, 0.4);
     }
 
     footer {
-      text-align: center;
       padding: 30px;
+      text-align: center;
       color: var(--muted);
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     @media (max-width: 900px) {
       .nav {
-        padding: 20px 0;
-        align-items: center;
         flex-direction: column;
+        padding: 20px 0;
       }
 
       .menu,
@@ -251,7 +242,6 @@
 
       .btn {
         width: 100%;
-        text-align: center;
       }
     }
   </style>
@@ -271,8 +261,8 @@
       </nav>
 
       <div class="nav-actions">
-        <a class="btn outline" href="/login">Login</a>
-        <a class="btn" href="/get-started">Get Started</a>
+        <a class="btn outline" href="login.html">Login</a>
+        <a class="btn" href="register.html">Get Started</a>
       </div>
     </div>
   </header>
@@ -287,7 +277,6 @@
   <section class="pricing">
     <div class="container">
       <div class="grid">
-
         <div class="card">
           <h3 class="blue">Assign Plan</h3>
           <div class="price">$5 <span>/month</span></div>
@@ -306,7 +295,6 @@
           <div class="price">$10 <span>/month</span></div>
           <p class="desc">Everything included: AI tools, scheduling system, and full platform access.</p>
         </div>
-
       </div>
     </div>
   </section>
@@ -316,4 +304,3 @@
   </footer>
 </body>
 </html>
-
