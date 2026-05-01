@@ -240,6 +240,23 @@
       text-align: center;
     }
 
+    .master-mode {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(134, 188, 255, 0.18);
+    }
+
+    .master-mode h3 {
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    .master-mode p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
     @media (max-width: 900px) {
       .nav {
         flex-direction: column;
@@ -273,7 +290,6 @@
   <header>
     <div class="nav">
       <a class="logo" href="index.html">Officials <span>Engine</span></a>
-
       <nav class="menu" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
@@ -281,7 +297,6 @@
         <a href="index.html#plans">How It Works</a>
         <a href="index.html#about">About Us</a>
       </nav>
-
       <a class="btn" href="register.html">Get Started</a>
     </div>
   </header>
@@ -297,7 +312,6 @@
     <section class="auth-card" aria-labelledby="login-title">
       <h2 id="login-title">Login</h2>
       <p>Use the email and password you registered with.</p>
-
       <div id="message" class="message" aria-live="polite"></div>
 
       <form id="loginForm">
@@ -316,7 +330,6 @@
             <input id="remember" type="checkbox" />
             Remember me
           </label>
-
           <button class="link" type="button" id="forgotPassword">Forgot password?</button>
         </div>
 
@@ -324,6 +337,18 @@
       </form>
 
       <p class="switch">Need an account? <a class="link" href="register.html">Create one</a></p>
+
+      <div class="master-mode">
+        <h3>Master Mode</h3>
+        <p>Use your private master code to go straight to the dashboard.</p>
+        <form id="masterForm">
+          <label>
+            Master code
+            <input id="masterCode" type="password" autocomplete="off" required />
+          </label>
+          <button class="btn outline" type="submit">Enter Dashboard</button>
+        </form>
+      </div>
     </section>
   </main>
 
@@ -377,7 +402,27 @@
     document.getElementById("forgotPassword").addEventListener("click", function () {
       showMessage("Password reset is not built yet. Create a new account or contact your site admin.", "error");
     });
+
+    document.getElementById("masterForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      try {
+        await apiRequest("/api/master-login", {
+          method: "POST",
+          body: JSON.stringify({
+            code: document.getElementById("masterCode").value
+          })
+        });
+
+        showMessage("Master Mode accepted. Taking you to your dashboard...", "success");
+
+        window.setTimeout(function () {
+          window.location.href = "dashboard.html";
+        }, 500);
+      } catch (error) {
+        showMessage(error.message, "error");
+      }
+    });
   </script>
 </body>
 </html>
-
