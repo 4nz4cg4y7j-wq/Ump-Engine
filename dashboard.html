@@ -15,7 +15,6 @@
       --blue: #2478ff;
       --blue-2: #0f58d9;
       --green: #57d980;
-      --violet: #9663ff;
       --shadow: 0 24px 80px rgba(0, 0, 0, 0.44);
     }
 
@@ -27,8 +26,8 @@
       font-family: Inter, system-ui, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 20% 0%, rgba(36,120,255,.2), transparent 35rem),
-        radial-gradient(circle at 90% 20%, rgba(150,99,255,.14), transparent 30rem),
+        radial-gradient(circle at 20% 0%, rgba(36, 120, 255, 0.2), transparent 35rem),
+        radial-gradient(circle at 90% 20%, rgba(150, 99, 255, 0.14), transparent 30rem),
         var(--bg);
     }
 
@@ -36,8 +35,8 @@
     button, input, select, textarea { font: inherit; }
 
     header {
-      background: rgba(2, 9, 19, 0.9);
       border-bottom: 1px solid rgba(100, 164, 255, 0.12);
+      background: rgba(2, 9, 19, 0.9);
     }
 
     .nav {
@@ -61,10 +60,11 @@
 
     .menu {
       display: flex;
-      gap: 28px;
+      align-items: center;
+      gap: clamp(16px, 2.4vw, 34px);
       margin-left: auto;
-      font-weight: 700;
-      color: rgba(255,255,255,.9);
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
     }
 
     .menu a:hover { color: var(--blue); }
@@ -75,8 +75,8 @@
       justify-content: center;
       min-height: 46px;
       padding: 0 18px;
-      border: 1px solid transparent;
       border-radius: 8px;
+      border: 1px solid transparent;
       color: #fff;
       font-weight: 800;
       background: linear-gradient(180deg, var(--blue), var(--blue-2));
@@ -87,7 +87,7 @@
 
     .btn.outline {
       background: rgba(2, 9, 19, 0.45);
-      border-color: rgba(255,255,255,.7);
+      border-color: rgba(255, 255, 255, 0.7);
       box-shadow: none;
     }
 
@@ -127,22 +127,26 @@
     .dashboard-link {
       border: 1px solid var(--line);
       border-radius: 12px;
-      background: linear-gradient(145deg, rgba(22,58,98,.38), rgba(3,13,27,.92)), var(--panel);
+      background:
+        linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.92)),
+        var(--panel);
       box-shadow: var(--shadow);
     }
 
-    .metric-card {
-      padding: 20px;
-    }
+    .metric-card { padding: 20px; }
 
     .metric-card strong {
       display: block;
       margin-bottom: 5px;
+      color: #fff;
       font-size: 2.3rem;
       line-height: 1;
     }
 
-    .metric-card span { color: var(--muted); font-weight: 700; }
+    .metric-card span {
+      color: var(--muted);
+      font-weight: 700;
+    }
 
     .dashboard-links {
       display: grid;
@@ -161,10 +165,13 @@
     .dashboard-link:hover,
     .dashboard-link.active {
       border-color: var(--blue);
-      background: linear-gradient(145deg, rgba(36,120,255,.24), rgba(3,13,27,.92)), var(--panel);
+      background:
+        linear-gradient(145deg, rgba(36, 120, 255, 0.24), rgba(3, 13, 27, 0.92)),
+        var(--panel);
     }
 
     .dashboard-link strong {
+      color: #fff;
       font-size: 1.35rem;
       text-transform: uppercase;
     }
@@ -278,7 +285,7 @@
     .group-button {
       width: 100%;
       padding: 14px;
-      border: 1px solid rgba(134,188,255,.22);
+      border: 1px solid rgba(134, 188, 255, 0.22);
       border-radius: 10px;
       color: #fff;
       background: rgba(2, 9, 19, 0.55);
@@ -291,10 +298,16 @@
       background: rgba(36, 120, 255, 0.16);
     }
 
+    .group-button strong,
+    .item-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
     .muted { color: var(--muted); }
 
     .small {
-      font-size: .92rem;
+      font-size: 0.92rem;
       line-height: 1.35;
     }
 
@@ -311,10 +324,10 @@
       align-items: center;
       min-height: 30px;
       padding: 0 10px;
-      border: 1px solid rgba(87,217,128,.44);
+      border: 1px solid rgba(87, 217, 128, 0.44);
       border-radius: 999px;
       color: var(--green);
-      background: rgba(87,217,128,.1);
+      background: rgba(87, 217, 128, 0.1);
       font-weight: 800;
       white-space: nowrap;
     }
@@ -329,7 +342,7 @@
     .tab {
       min-height: 42px;
       padding: 0 16px;
-      border: 1px solid rgba(134,188,255,.24);
+      border: 1px solid rgba(134, 188, 255, 0.24);
       border-radius: 8px;
       color: var(--muted);
       background: rgba(2, 9, 19, 0.52);
@@ -348,15 +361,9 @@
 
     .item-card {
       padding: 16px;
-      border: 1px solid rgba(134,188,255,.2);
+      border: 1px solid rgba(134, 188, 255, 0.2);
       border-radius: 10px;
       background: rgba(2, 9, 19, 0.5);
-    }
-
-    .item-card strong,
-    .group-button strong {
-      display: block;
-      margin-bottom: 4px;
     }
 
     .item-grid {
@@ -376,7 +383,7 @@
     .detail {
       padding: 10px;
       border-radius: 8px;
-      background: rgba(134,188,255,.07);
+      background: rgba(134, 188, 255, 0.07);
       color: var(--muted);
       line-height: 1.35;
     }
@@ -392,18 +399,18 @@
     .message.show { display: block; }
 
     .message.success {
-      border: 1px solid rgba(87,217,128,.45);
-      background: rgba(87,217,128,.13);
+      border: 1px solid rgba(87, 217, 128, 0.45);
+      background: rgba(87, 217, 128, 0.13);
     }
 
     .message.error {
-      border: 1px solid rgba(255,107,107,.45);
-      background: rgba(255,107,107,.13);
+      border: 1px solid rgba(255, 107, 107, 0.45);
+      background: rgba(255, 107, 107, 0.13);
     }
 
     .empty {
       padding: 18px;
-      border: 1px dashed rgba(134,188,255,.28);
+      border: 1px dashed rgba(134, 188, 255, 0.28);
       border-radius: 10px;
       color: var(--muted);
       background: rgba(2, 9, 19, 0.35);
@@ -413,7 +420,7 @@
     .bulk-help {
       margin: -4px 0 0;
       color: var(--muted);
-      font-size: .92rem;
+      font-size: 0.92rem;
       line-height: 1.45;
     }
 
@@ -714,58 +721,63 @@
   </main>
 
   <script>
-    const SESSION_KEY = "officialsEngineSession";
-    const GROUPS_KEY = "officialsEngineGroups";
-    const ACTIVE_GROUP_KEY = "officialsEngineActiveGroup";
-
-    const session = JSON.parse(localStorage.getItem(SESSION_KEY) || "null");
-
+    let currentUser = null;
     let groups = [];
-    let activeGroupId = localStorage.getItem(ACTIVE_GROUP_KEY) || "";
+    let activeGroupId = "";
     let activeTab = "umpires";
 
-    if (!session) {
-      window.location.href = "login.html";
-    } else {
-      document.getElementById("displayName").textContent = session.name || "Official";
-      document.getElementById("accountLine").textContent =
-        "Signed in as " + session.role + ". Use Groups to manage tournaments, umpires, and schedules.";
+    initDashboard();
 
-      loadGroups();
-      renderAll();
-      syncDashboardView();
+    async function apiRequest(url, options) {
+      const response = await fetch(url, {
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        ...options
+      });
+
+      const data = await response.json().catch(function () {
+        return {};
+      });
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      return data;
+    }
+
+    async function initDashboard() {
+      try {
+        const me = await apiRequest("/api/me");
+        currentUser = me.user;
+
+        document.getElementById("displayName").textContent = currentUser.name || "Official";
+        document.getElementById("accountLine").textContent =
+          "Signed in as " + currentUser.role + ". Build groups, umpires, and schedules below.";
+
+        await loadGroups();
+        renderAll();
+        syncDashboardView();
+      } catch (error) {
+        window.location.href = "login.html";
+      }
     }
 
     window.addEventListener("hashchange", syncDashboardView);
 
-    function loadGroups() {
-      groups = JSON.parse(localStorage.getItem(GROUPS_KEY) || "[]");
-    }
-
-    function saveGroups() {
-      localStorage.setItem(GROUPS_KEY, JSON.stringify(groups));
-    }
-
-    function createId(prefix) {
-      return prefix + "-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
+    async function loadGroups() {
+      const data = await apiRequest("/api/groups");
+      groups = data.groups || [];
     }
 
     function myGroups() {
-      return groups.filter(function (group) {
-        return group.ownerEmail === session.email;
-      });
+      return groups;
     }
 
     function activeGroup() {
       return myGroups().find(function (group) {
         return group.id === activeGroupId;
       }) || null;
-    }
-
-    function syncDashboardView() {
-      const showGroups = window.location.hash === "#groups";
-      document.getElementById("groups").hidden = !showGroups;
-      document.getElementById("groupsDashboardLink").classList.toggle("active", showGroups);
     }
 
     function setMessage(id, text, type) {
@@ -783,6 +795,15 @@
       renderMetrics();
       renderGroups();
       renderWorkspace();
+    }
+
+    function syncDashboardView() {
+      const groupsShell = document.getElementById("groups");
+      const groupsDashboardLink = document.getElementById("groupsDashboardLink");
+      const showGroups = window.location.hash === "#groups";
+
+      groupsShell.hidden = !showGroups;
+      groupsDashboardLink.classList.toggle("active", showGroups);
     }
 
     function renderMetrics() {
@@ -970,12 +991,12 @@
         .replaceAll("'", "&#039;");
     }
 
-    document.getElementById("logoutButton").addEventListener("click", function () {
-      localStorage.removeItem(SESSION_KEY);
+    document.getElementById("logoutButton").addEventListener("click", async function () {
+      await apiRequest("/api/logout", { method: "POST" }).catch(function () {});
       window.location.href = "login.html";
     });
 
-    document.getElementById("groupForm").addEventListener("submit", function (event) {
+    document.getElementById("groupForm").addEventListener("submit", async function (event) {
       event.preventDefault();
 
       const name = document.getElementById("groupName").value.trim();
@@ -994,38 +1015,34 @@
         return;
       }
 
-      const group = {
-        id: createId("group"),
-        ownerEmail: session.email,
-        name: name,
-        sport: sport,
-        startDate: startDate,
-        endDate: endDate,
-        type: "static",
-        umpires: [],
-        games: [],
-        createdAt: new Date().toISOString()
-      };
+      try {
+        const data = await apiRequest("/api/groups", {
+          method: "POST",
+          body: JSON.stringify({
+            name,
+            sport,
+            startDate,
+            endDate,
+            type: "static"
+          })
+        });
 
-      groups.push(group);
-      activeGroupId = group.id;
-      localStorage.setItem(ACTIVE_GROUP_KEY, activeGroupId);
-      saveGroups();
-
-      event.target.reset();
-      document.getElementById("staticGroup").checked = true;
-
-      setMessage("groupMessage", "Group created. You can add umpires and schedule now.", "success");
-      renderAll();
+        groups = data.groups || [];
+        activeGroupId = data.activeGroupId || "";
+        event.target.reset();
+        document.getElementById("staticGroup").checked = true;
+        setMessage("groupMessage", "Group created. You can add umpires and schedule now.", "success");
+        renderAll();
+      } catch (error) {
+        setMessage("groupMessage", error.message, "error");
+      }
     });
 
     document.getElementById("groupList").addEventListener("click", function (event) {
       const button = event.target.closest("[data-group-id]");
-
       if (!button) return;
 
       activeGroupId = button.dataset.groupId;
-      localStorage.setItem(ACTIVE_GROUP_KEY, activeGroupId);
       renderAll();
     });
 
@@ -1036,56 +1053,63 @@
       });
     });
 
-    document.getElementById("umpireForm").addEventListener("submit", function (event) {
+    document.getElementById("umpireForm").addEventListener("submit", async function (event) {
       event.preventDefault();
 
       const group = activeGroup();
-
       if (!group) return;
 
-      group.umpires.push({
-        id: createId("umpire"),
-        name: document.getElementById("umpireName").value.trim(),
-        contact: document.getElementById("umpireContact").value.trim(),
-        availability: document.getElementById("umpireAvailability").value.trim(),
-        conflicts: document.getElementById("umpireConflicts").value.trim(),
-        abilities: document.getElementById("umpireAbilities").value.trim(),
-        superiority: document.getElementById("umpireSuperiority").value,
-        createdAt: new Date().toISOString()
-      });
+      try {
+        const data = await apiRequest("/api/groups/" + group.id + "/umpires", {
+          method: "POST",
+          body: JSON.stringify({
+            name: document.getElementById("umpireName").value.trim(),
+            contact: document.getElementById("umpireContact").value.trim(),
+            availability: document.getElementById("umpireAvailability").value.trim(),
+            conflicts: document.getElementById("umpireConflicts").value.trim(),
+            abilities: document.getElementById("umpireAbilities").value.trim(),
+            superiority: document.getElementById("umpireSuperiority").value
+          })
+        });
 
-      saveGroups();
-      event.target.reset();
-      document.getElementById("umpireSuperiority").value = "3";
-      renderAll();
+        groups = data.groups || [];
+        event.target.reset();
+        document.getElementById("umpireSuperiority").value = "3";
+        renderAll();
+      } catch (error) {
+        alert(error.message);
+      }
     });
 
-    document.getElementById("gameForm").addEventListener("submit", function (event) {
+    document.getElementById("gameForm").addEventListener("submit", async function (event) {
       event.preventDefault();
 
       const group = activeGroup();
-
       if (!group) return;
 
-      group.games.push({
-        id: createId("game"),
-        date: document.getElementById("gameDate").value,
-        time: document.getElementById("gameTime").value,
-        field: document.getElementById("gameField").value.trim(),
-        teamOne: document.getElementById("teamOne").value.trim(),
-        teamTwo: document.getElementById("teamTwo").value.trim(),
-        level: document.getElementById("gameLevel").value.trim(),
-        umpireId: document.getElementById("assignedUmpire").value,
-        source: "single",
-        createdAt: new Date().toISOString()
-      });
+      try {
+        const data = await apiRequest("/api/groups/" + group.id + "/games", {
+          method: "POST",
+          body: JSON.stringify({
+            date: document.getElementById("gameDate").value,
+            time: document.getElementById("gameTime").value,
+            field: document.getElementById("gameField").value.trim(),
+            teamOne: document.getElementById("teamOne").value.trim(),
+            teamTwo: document.getElementById("teamTwo").value.trim(),
+            level: document.getElementById("gameLevel").value.trim(),
+            umpireId: document.getElementById("assignedUmpire").value
+          })
+        });
 
-      saveGroups();
-      event.target.reset();
-      renderAll();
+        groups = data.groups || [];
+        event.target.reset();
+        renderAll();
+      } catch (error) {
+        alert(error.message);
+      }
     });
 
-    document.getElementById("bulkGameForm").addEventListener("submit", function (event) {
+    document.getElementById("bulkGameForm").addEventListener("submit", async function (event) {
       event.preventDefault();
 
       const group = activeGroup();
@@ -1106,19 +1130,25 @@
         return;
       }
 
-      group.games.push.apply(group.games, games);
-      saveGroups();
+      try {
+        const data = await apiRequest("/api/groups/" + group.id + "/games/bulk", {
+          method: "POST",
+          body: JSON.stringify({ games })
+        });
 
-      document.getElementById("bulkGames").value = "";
-      setMessage("scheduleMessage", games.length + " games imported.", "success");
-      renderAll();
+        groups = data.groups || [];
+        document.getElementById("bulkGames").value = "";
+        setMessage("scheduleMessage", games.length + " games imported.", "success");
+        renderAll();
+      } catch (error) {
+        setMessage("scheduleMessage", error.message, "error");
+      }
     });
 
-    document.getElementById("gameList").addEventListener("change", function (event) {
+    document.getElementById("gameList").addEventListener("change", async function (event) {
       if (!event.target.classList.contains("game-assign")) return;
 
       const group = activeGroup();
-
       if (!group) return;
 
       const game = group.games.find(function (item) {
@@ -1127,14 +1157,21 @@
 
       if (!game) return;
 
-      game.umpireId = event.target.value;
-      saveGroups();
-      renderAll();
+      try {
+        const data = await apiRequest("/api/groups/" + group.id + "/games/" + game.id, {
+          method: "PATCH",
+          body: JSON.stringify({ umpireId: event.target.value })
+        });
+
+        groups = data.groups || [];
+        renderAll();
+      } catch (error) {
+        alert(error.message);
+      }
     });
 
     function parseGameRow(row) {
       const clean = row.trim();
-
       if (!clean) return null;
 
       const parts = clean.includes("\t")
@@ -1143,16 +1180,12 @@
 
       if (parts.length >= 5) {
         return {
-          id: createId("game"),
           date: parts[0] || "",
           time: parts[1] || "",
           field: parts[2] || "",
           teamOne: parts[3] || "Team 1",
           teamTwo: parts[4] || "Team 2",
-          level: parts[5] || "",
-          umpireId: "",
-          source: "bulk",
-          createdAt: new Date().toISOString()
+          level: parts[5] || ""
         };
       }
 
@@ -1160,16 +1193,12 @@
 
       if (vsParts.length === 2) {
         return {
-          id: createId("game"),
           date: "",
           time: "",
           field: "",
           teamOne: vsParts[0].trim(),
           teamTwo: vsParts[1].trim(),
-          level: "",
-          umpireId: "",
-          source: "bulk",
-          createdAt: new Date().toISOString()
+          level: ""
         };
       }
 
