@@ -40,16 +40,17 @@
     }
 
     header {
-      padding: 26px 40px;
       border-bottom: 1px solid rgba(100, 164, 255, 0.12);
       background: rgba(2, 9, 19, 0.85);
       backdrop-filter: blur(10px);
     }
 
     .nav {
+      min-height: 96px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: min(100% - 40px, 1200px);
       max-width: 1200px;
       margin: auto;
       gap: 20px;
@@ -65,7 +66,31 @@
       color: var(--blue);
     }
 
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 2.4vw, 34px);
+      margin-left: auto;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      color: var(--blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 10px 18px;
       border-radius: 8px;
       font-weight: 700;
@@ -74,6 +99,12 @@
       box-shadow: 0 14px 30px rgba(36, 120, 255, 0.25);
       transition: 0.2s;
       white-space: nowrap;
+    }
+
+    .btn.outline {
+      background: rgba(2, 9, 19, 0.45);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: none;
     }
 
     .btn:hover {
@@ -117,7 +148,8 @@
     }
 
     .card {
-      background: linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.9));
+      background:
+        linear-gradient(145deg, rgba(22, 58, 98, 0.38), rgba(3, 13, 27, 0.9));
       border: 1px solid var(--line);
       border-radius: 12px;
       padding: 28px;
@@ -194,19 +226,27 @@
     }
 
     @media (max-width: 900px) {
+      .nav {
+        padding: 20px 0;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .menu,
+      .nav-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
       .grid {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 520px) {
-      header {
-        padding: 22px 20px;
-      }
-
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
+      .menu,
+      .nav-actions {
+        width: 100%;
       }
 
       .btn {
@@ -221,7 +261,19 @@
   <header>
     <div class="nav">
       <a class="logo" href="index.html">Officials <span>Engine</span></a>
-      <a class="btn" href="/get-started">Get Started</a>
+
+      <nav class="menu" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a class="active" href="./pricing.html">Pricing</a>
+        <a href="index.html#plans">How It Works</a>
+        <a href="index.html#about">About Us</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn outline" href="/login">Login</a>
+        <a class="btn" href="/get-started">Get Started</a>
+      </div>
     </div>
   </header>
 
@@ -235,6 +287,7 @@
   <section class="pricing">
     <div class="container">
       <div class="grid">
+
         <div class="card">
           <h3 class="blue">Assign Plan</h3>
           <div class="price">$5 <span>/month</span></div>
@@ -253,6 +306,7 @@
           <div class="price">$10 <span>/month</span></div>
           <p class="desc">Everything included: AI tools, scheduling system, and full platform access.</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -262,3 +316,4 @@
   </footer>
 </body>
 </html>
+
